@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>State of AI in GTM: 2026 | CascadeGTM — Part 1</title>
+<title>State of AI in GTM: 2026 | CascadeGTM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #0D0E12;
@@ -24,7 +24,7 @@
     --mid-bg: #E8F6EF;
     --niche: #5B3FBE;
     --niche-bg: #F0EDFA;
-    --serif: 'Syne', sans-serif;
+    --serif: 'Playfair Display', Georgia, serif;
     --body: 'Inter', sans-serif;
     --mono: 'JetBrains Mono', monospace;
   }
@@ -58,7 +58,7 @@
   .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
   h1 {
     font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+    font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
     color: var(--ink); margin-bottom: 1.5rem; max-width: 820px;
   }
   h1 em { font-style: normal; color: var(--accent); }
@@ -121,7 +121,7 @@
   }
   h2 {
     font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
+    font-weight: 900; letter-spacing: -0.015em; line-height: 1.2;
   }
   .section-intro {
     font-size: 1rem; color: var(--ink-mid); line-height: 1.7;
@@ -171,8 +171,8 @@
     border-bottom: 1px solid var(--rule);
   }
   .cat-name {
-    font-family: var(--serif); font-size: 1.2rem; font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: var(--serif); font-size: 1.2rem; font-weight: 900;
+    letter-spacing: -0.01em;
   }
   .cat-count {
     font-family: var(--mono); font-size: 0.68rem; color: var(--ink-light);
@@ -326,31 +326,36 @@
   /* NAV */
   .site-nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.97);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid #E8ECF0;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem;
-    height: 56px;
+    padding: 0 2.5rem;
+    height: 64px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
   .nav-logo {
-    font-family: var(--serif); font-weight: 800; font-size: 1rem;
-    color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+    display: flex; align-items: center;
+    text-decoration: none; line-height: 1;
   }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-logo img {
+    height: 28px; width: auto; display: block;
+  }
+  .nav-links { display: flex; gap: 2.25rem; list-style: none; }
   .nav-links a {
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-mid); text-decoration: none;
-    transition: color 0.15s;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; color: #1B2B4B; text-decoration: none;
+    transition: color 0.15s; font-family: var(--body);
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-links a:hover { color: #2E7D32; }
+  .nav-links a.active { color: #2E7D32; border-bottom: 2px solid #2E7D32; padding-bottom: 2px; }
   .nav-cta {
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--page); background: var(--ink);
-    padding: 0.45rem 1.1rem; border-radius: 4px; text-decoration: none;
-    transition: background 0.15s;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: #FFFFFF; background: #1B2B4B;
+    padding: 0.55rem 1.25rem; border-radius: 4px; text-decoration: none;
+    transition: background 0.15s; font-family: var(--body);
   }
-  .nav-cta:hover { background: var(--accent); }
+  .nav-cta:hover { background: #2E7D32; }
   @media (max-width: 768px) { .nav-links { display: none; } }
 
   /* FULL-WIDTH CONTENT LAYOUT */
@@ -453,7 +458,7 @@
 </head>
 <body>
 <nav class="site-nav">
-  <a class="nav-logo" href="https://www.cascadegtm.co">CascadeGTM</a>
+  <a class="nav-logo" href="https://www.cascadegtm.co"><img src="data:image/png;base64,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" alt="CascadeGTM" /></a>
   <ul class="nav-links">
     <li><a href="https://www.cascadegtm.co">Home</a></li>
     <li><a href="https://www.cascadegtm.co/about">About</a></li>
@@ -466,7 +471,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Cascade GTM — Thoughts № 001 · Personal Research Notes</div>
+  <div class="hero-eyebrow">CascadeGTM Thoughts № 001 · Research &amp; Recommendations</div>
   <h1>State of AI in GTM: <em>2026</em><br>Why the Last Six Months Changed Everything</h1>
   <p class="hero-sub">An analysis of 80+ GTM tools across 14 categories, from CRM to orchestration, mapping where AI is actually delivering ROI, where hype outpaces reality, and what revenue leaders should do next.</p>
   <div class="hero-meta">
@@ -2053,122 +2058,157 @@
       </div>
     </div>
 
-    <div class="conclusion-section" style="padding: 0 2rem; margin-bottom: 2rem;">
+    <div class="conclusion-section" style="padding: 0 2rem; margin-bottom: 0;">
 
       <!-- ── CONCLUSION HEADER ── -->
       <div style="border-top: 2px solid var(--ink); padding: 3rem 0 1.5rem;">
-        <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--ink-light); letter-spacing: 0.1em; text-transform: uppercase;">Final Thoughts</span>
-        <h2 style="font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; color: var(--ink); margin-top: 0.5rem;">The Fear Is Fading. The Opportunity Is Real.</h2>
+        <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--ink-light); letter-spacing: 0.1em; text-transform: uppercase;">Actionable Summary</span>
+        <h2 style="font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; color: var(--ink); margin-top: 0.5rem;">The Opportunity Is Real. Here Is How to Act on It.</h2>
+        <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-top: 1rem; max-width: 760px;">This section is written for the people who will actually make the decisions this report points toward. The research is done. The market has moved. What follows is what I would recommend based on everything in this report, addressed to the leaders who have to deliver in this environment.</p>
       </div>
 
-      <!-- ── SECTION 1: What's Actually Happening ── -->
-      <h3 style="font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin: 2rem 0 0.75rem;">AI isn't shrinking GTM teams. It's making them faster.</h3>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">Eighteen months ago, the dominant conversation in GTM was fear: AI would replace SDRs, marketing automation would make demand generation headcount obsolete, the revenue org would shrink to a skeleton crew overseeing agent workflows. That fear was understandable. It was also largely wrong.</p>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.5rem;">The GTM teams winning in 2026 aren't smaller. They're faster. Notion compressed their enterprise outbound research cycle from three days to three hours without cutting headcount. Canva's sales organization reported a 60% productivity increase after deploying Gong's AI suite, covering 40% more pipeline with the same team. Lattice and Airbyte used Unify's signal-driven Plays to replace a manual SDR workflow — with the same people doing higher-leverage work. The pattern is consistent: AI is elevating what GTM teams can produce, not eliminating the function itself.</p>
-
-      <!-- ── REAL EXAMPLES GRID ── -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2rem;">
+      <!-- ── TLDR STAT GRID ── -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2.5rem;">
         <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Notion</div>
-          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">3 hrs</div>
-          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">Enterprise outbound research cycle, down from 3 days. Same headcount.</div>
+          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">ICONIQ Top Quartile</div>
+          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">111%</div>
+          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">YoY ARR growth for companies under $50M ARR in H2 2025. The best are pulling away.</div>
         </div>
         <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Canva</div>
-          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">60%</div>
-          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">Sales productivity increase after Gong AI deployment. 40% more pipeline covered.</div>
+          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">AI-Native Teams</div>
+          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">38%</div>
+          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">Leaner GTM orgs under $25M ARR with high AI adoption vs. traditional SaaS peers. (ICONIQ 2025)</div>
         </div>
         <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">The "$5M AE"</div>
-          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">5×</div>
-          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">One rep running AI agents at the volume that once required a team of five. Being executed today.</div>
+          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">GTM Eng Job Growth</div>
+          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">205%</div>
+          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">YoY growth in GTM Engineering job postings 2024 to 2025. 3,000+ open roles by January 2026.</div>
         </div>
         <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Gartner</div>
-          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">40%</div>
-          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">Of enterprise applications will have task-specific AI agents by end of 2026, up from under 5% in 2025.</div>
+          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Revenue Per Employee</div>
+          <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1;">$369K</div>
+          <div style="font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.35rem; line-height: 1.5;">Top quartile public SaaS companies. Up from $283K median. AI tooling is the primary driver.</div>
         </div>
       </div>
 
-      <!-- ── SECTION 2: What's Coming in H2 2026 ── -->
-      <h3 style="font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin: 2rem 0 0.75rem;">H2 2026 and beyond: consolidation, not expansion.</h3>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">The consolidation underway today will accelerate. The Clari-Salesloft merger is a template. Expect 2–3 more major platform combinations as the market discovers that point solutions without orchestration are increasingly difficult to justify at the board level. The winners will be platforms that demonstrate measurable revenue outcomes as their core value proposition, not feature counts. We are still in early innings despite how crowded the market feels.</p>
-
-      <!-- ── SECTION 3: The Real Cost Question ── -->
-      <h3 style="font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin: 2rem 0 0.75rem;">On the cost of AI: it's real, it's manageable, and legacy has its own bill.</h3>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1rem;">The cost of an AI-native revenue motion is real and ongoing: infrastructure subscriptions, token-based API fees priced per workflow executed, and governance overhead. It is also structured and measurable — unlike the costs of doing nothing.</p>
-
-      <!-- ── COST COMPARISON GRID ── -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 1.25rem;">
-        <div style="background: var(--accent-dim); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;">AI-Native Motion</div>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--ink-mid); line-height: 1.8;">
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">Infrastructure &amp; API token costs</li>
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">Governance &amp; cost management overhead</li>
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">GTM Engineering talent investment</li>
-            <li style="padding: 0.2rem 0; color: var(--accent); font-weight: 500;">Structured · measurable · declining over time</li>
-          </ul>
-        </div>
-        <div style="background: var(--surface); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.75rem;">Legacy Manual Motion</div>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--ink-mid); line-height: 1.8;">
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">Slower sales cycles = reduced revenue</li>
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">Manual headcount doing automatable work</li>
-            <li style="padding: 0.2rem 0; border-bottom: 1px solid var(--rule);">Talent turnover from underinvestment in tools</li>
-            <li style="padding: 0.2rem 0; color: var(--strong); font-weight: 500;">Sneaky · rising · rarely on one line item</li>
-          </ul>
-        </div>
+      <!-- ── FOR FOUNDERS & CFOs ── -->
+      <div style="border-left: 3px solid #1B2B4B; padding: 1.25rem 1.5rem; background: var(--surface); margin-bottom: 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: #1B2B4B; margin-bottom: 0.75rem; font-weight: 600;">For Founders &amp; CFOs</div>
+        <h3 style="font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;">The economics have shifted. AI-native GTM is not more expensive — it is more predictable.</h3>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">The top quartile of VC-backed growth stage companies under $50M ARR grew at 111% in H2 2025. They did it with GTM orgs that are 38% leaner than traditional SaaS peers. That is not a coincidence. AI-enabled revenue infrastructure reduces the headcount required to drive a dollar of pipeline. It replaces hiring cycles with infrastructure investment, which is more flexible and less disruptive than the alternative.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">On cost: token-based AI spending is real and requires governance. The median monthly business AI spend is $2,246. The average is $140,842 — driven by ungoverned workflows. Governed systems running hard token limits and model routing bring costs to predictable monthly line items. Compare that to a sales hire: $120K–$180K base, six-month ramp, benefits, equity, recruiting fees, and a 40–60% first-year attrition risk in the current market. AI infrastructure, governed properly, is the more flexible and less binary investment.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7;"><strong style="color: var(--ink);">The recommendation:</strong> Fund the GTM Engineering function as infrastructure, not overhead. Model the ROI in pipeline generated per dollar spent. Then compare it to your current cost of customer acquisition. The numbers make the case.</p>
       </div>
 
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">On the fear of unexpected AI bills: it's a legitimate concern and worth addressing directly. A single Claude agent running complex multi-step logic over a full workday can consume $1,000–$5,000 in tokens if left ungoverned. The median monthly AI spend across businesses tracked by Ramp was $2,246. The average was $140,842. That gap reflects what happens when a single unchecked workflow runs at scale. The answer is governance. Enterprises using AI gateway tools report 40–60% reductions in inference costs. Hard token limits per workflow, routing lower-stakes tasks to lighter models, and caching to eliminate redundant calls are well-understood practices. The teams seeing surprise bills skipped the governance architecture. The teams that built it first are running these systems profitably.</p>
-
-      <!-- ── SECTION 4: The Org Investment Shift ── -->
-      <h3 style="font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin: 2rem 0 0.75rem;">This is an organizational decision as much as a technology one.</h3>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">Building a clean data foundation, consolidating your stack, and investing in GTM Engineering require rethinking how these functions are viewed inside the organization. The roles that used to be called Business Systems or Revenue Operations often sit in cost-center budgets, compensated like administrators. That framing produces administrators. The teams winning in 2026 have reclassified these functions as revenue infrastructure and funded them accordingly.</p>
-
-      <!-- ── COMP BENCHMARK GRID ── -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--ink); border: 1px solid var(--ink); margin-bottom: 1.25rem;">
-        <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem;">RevOps / BizSys (2025)</div>
-          <div style="font-family: var(--serif); font-size: 1.4rem; font-weight: 800; color: var(--ink-mid); letter-spacing: -0.04em;">$96–129K</div>
-          <div style="font-size: 0.78rem; color: var(--ink-light); margin-top: 0.35rem; line-height: 1.5;">Average base. Minimal variable. Cost-center framing.</div>
-        </div>
-        <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem;">GTM Engineer (2026)</div>
-          <div style="font-family: var(--serif); font-size: 1.4rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em;">$132–241K</div>
-          <div style="font-size: 0.78rem; color: var(--ink-light); margin-top: 0.35rem; line-height: 1.5;">Base salary. 25–30% variable tied to pipeline outcomes.</div>
-        </div>
-        <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem;">GTM Eng OTE (2026)</div>
-          <div style="font-family: var(--serif); font-size: 1.4rem; font-weight: 800; color: var(--ink); letter-spacing: -0.04em;">$230–310K</div>
-          <div style="font-size: 0.78rem; color: var(--ink-light); margin-top: 0.35rem; line-height: 1.5;">Total comp at AI companies. Top tier: Vercel $252K, OpenAI $250K.</div>
-        </div>
-        <div style="background: var(--page); padding: 1.25rem;">
-          <div style="font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Direction of Travel</div>
-          <div style="font-family: var(--serif); font-size: 1.4rem; font-weight: 800; color: var(--accent); letter-spacing: -0.04em;">25–50%</div>
-          <div style="font-size: 0.78rem; color: var(--ink-light); margin-top: 0.35rem; line-height: 1.5;">Variable comp as attribution between automated systems and pipeline becomes cleaner.</div>
-        </div>
+      <!-- ── FOR CROs & CMOs ── -->
+      <div style="border-left: 3px solid #2E7D32; padding: 1.25rem 1.5rem; background: var(--surface); margin-bottom: 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: #2E7D32; margin-bottom: 0.75rem; font-weight: 600;">For CROs &amp; CMOs</div>
+        <h3 style="font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;">Your investors expect record revenue growth and lower OpEx simultaneously. Here is how the best teams are delivering both.</h3>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">The expectation from boards in 2026 is not growth or efficiency. It is both. ICONIQ's data shows the top quartile achieving 111% ARR growth while running leaner teams. That combination is only possible with an AI-native revenue engine underneath it. Signal-based prospecting replacing cold cadences. AI-powered forecasting replacing spreadsheet guesswork. Real-time conversation intelligence replacing post-call coaching. These are not productivity features. They are structural changes to how revenue is generated.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">The companies achieving this are not running more campaigns. They are running better-architected systems. Clay workflows generating 200 qualified meetings per month with one operator. Gong coaching agents delivering personalized rep feedback at scale. 6sense identifying in-market accounts weeks before they raise their hand. The average B2B company now uses 17 tools in its revenue stack. The winning ones are the teams that have connected those tools into a system that executes autonomously.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7;"><strong style="color: var(--ink);">The recommendation:</strong> Audit your current GTM motion for manual handoffs, disconnected systems, and workflows that require human initiation at every step. Each one is a compounding efficiency loss. Prioritize connecting the systems you already have before buying more.</p>
       </div>
 
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">Compensation needs to reflect the market. GTM Engineers command $132K–$241K in base with OTE structures of $230K–$310K and 25–30% variable tied to pipeline outcomes, meetings booked, and leads acquired. Organizations paying RevOps Administrator rates for GTM Engineering work will not win the talent competition. Investing in existing GTM Ops resources to grow into these roles — funding their tools and training and paying at a rate that reflects revenue impact — is the more cost-effective path than cycling through mis-hires.</p>
-      <p style="font-size: 1rem; color: var(--ink-mid); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem;">Further out: if GTM Engineering teams continue taking direct ownership of pipeline generated by automated systems, their compensation structures will evolve to match. Research from Landbase suggests variable components could move to 25–50% as revenue attribution becomes cleaner. A team building Clay workflows that generates 200 qualified meetings per month has a direct, measurable revenue impact. The question of whether they should be compensated more like sales leadership — with meaningful upside tied to outcomes — is one forward-looking revenue organizations are already asking. There is no settled answer yet. The direction of travel is clear: the closer a function gets to generating revenue, the more its compensation will converge with the people who have always been paid to do exactly that.</p>
+      <!-- ── FOR GTM OPS & HEADS OF PEOPLE ── -->
+      <div style="border-left: 3px solid var(--accent); padding: 1.25rem 1.5rem; background: var(--surface); margin-bottom: 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; font-weight: 600;">For Heads of GTM Ops, Revenue Operations &amp; People</div>
+        <h3 style="font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;">The role your organization needs is not a RevOps manager. It is a GTM Engineer. These are different people, paid differently, and measured differently.</h3>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">GTM Engineering job postings grew 205% year over year in 2025. LinkedIn listed over 3,000 open roles by January 2026. This is the fastest-growing title in B2B revenue right now. And it reflects a real shift: the market has decided that building revenue infrastructure is a different skill set than administering CRM hygiene. Many organizations are expecting their RevOps manager to do GTM Engineering work. That is the most common source of underdelivery I see.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">A traditional RevOps manager maintains existing systems, builds reports, and manages the sales tech stack. A GTM Engineer writes Python, builds enrichment waterfalls in Clay, architects agentic workflows in n8n or Gumloop, and is measured on pipeline generated and meetings booked — not tickets closed. These are not the same job. If you are running your RevOps manager against GTM Engineering outcomes, the gap in results is structural, not a performance issue.</p>
+
+        <!-- ── SALARY COMPARISON TABLE ── -->
+        <div style="overflow-x: auto; margin: 1.25rem 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+            <thead>
+              <tr style="background: var(--ink); color: white;">
+                <th style="padding: 0.65rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">Role</th>
+                <th style="padding: 0.65rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">Base Salary</th>
+                <th style="padding: 0.65rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">Variable / OTE</th>
+                <th style="padding: 0.65rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">Measured On</th>
+                <th style="padding: 0.65rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">Framing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: white; border-bottom: 1px solid var(--rule);">
+                <td style="padding: 0.65rem 1rem; color: var(--ink-mid);">RevOps Manager</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-mid);">$96K–$129K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-mid);">Minimal / rarely tied to pipeline</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-mid);">Tickets closed, reports delivered</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-mid);">Cost center / overhead</td>
+              </tr>
+              <tr style="background: var(--surface); border-bottom: 1px solid var(--rule);">
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">GTM Ops Specialist</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">$100K–$140K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">10–20% / growing</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Workflow performance, pipeline hygiene</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Transitional / emerging strategic</td>
+              </tr>
+              <tr style="background: white; border-bottom: 1px solid var(--rule);">
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">GTM Engineer — Series A/B</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">$130K–$170K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">25–30% / OTE $165K–$220K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Meetings booked, pipeline generated</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Revenue infrastructure</td>
+              </tr>
+              <tr style="background: var(--surface); border-bottom: 1px solid var(--rule);">
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">GTM Engineer — Series B/C</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink); font-weight: 600;">$160K–$220K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">25–30% / OTE $200K–$285K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Pipeline sourced, CAC improvement</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink);">Strategic / revenue-generating</td>
+              </tr>
+              <tr style="background: white; border-bottom: 1px solid var(--rule);">
+                <td style="padding: 0.65rem 1rem; color: var(--ink-light); font-style: italic;">Top AI Companies (Ramp, Vercel, OpenAI)</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-light);">$180K–$252K</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-light);">25–40% + significant equity</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-light);">Revenue systems impact</td>
+                <td style="padding: 0.65rem 1rem; color: var(--ink-light);">Engineering-grade / not the standard</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--ink-light); font-style: italic; margin-bottom: 0.75rem;">Note: OpenAI, Vercel, and Ramp represent the top of the market. Most Series A–C companies are hiring GTM Engineers in the $130K–$220K base range with 25–30% variable. These are the realistic benchmarks for growth-stage companies, not outliers.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7;"><strong style="color: var(--ink);">The recommendation:</strong> Audit the gap between what you are asking your current GTM Ops or RevOps team to deliver and what they are equipped and compensated to do. If you are expecting GTM Engineering output from RevOps management talent and pay, you are not facing a performance problem. You are facing a role definition and compensation problem. Fix the structure before changing the people.</p>
+      </div>
+
+      <!-- ── FOR HEADS OF MARKETPLACE & GROWTH ── -->
+      <div style="border-left: 3px solid var(--strong); padding: 1.25rem 1.5rem; background: var(--surface); margin-bottom: 2rem;">
+        <div style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--strong); margin-bottom: 0.75rem; font-weight: 600;">For Heads of Growth &amp; Marketplace</div>
+        <h3 style="font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;">Signal-based growth is replacing volume-based growth. The teams building signal infrastructure now are the ones who will compound.</h3>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.75rem;">Companies spending $2 in Sales and Marketing to earn $1 of new ARR — a 14% increase from 2024 — are running the old playbook. The teams breaking that ratio are the ones using intent signals, product usage data, and AI-orchestrated outreach to intercept buyers at the moment of highest receptivity. Demandbase processes over 2 trillion intent signals per month. 6sense identifies accounts in active buying cycles weeks before they reach out. Clay connects 150+ data sources into personalized outreach that reaches the right contact with the right message at the right time.</p>
+        <p style="font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7;"><strong style="color: var(--ink);">The recommendation:</strong> Shift your growth motion from volume to signal. Start with one intent data source, one enrichment workflow, and one automated sequence triggered by a buying signal rather than a calendar cadence. Measure reply rates and meeting conversion against your current baseline. The improvement will make the case for the next investment.</p>
+      </div>
 
       <!-- ── CLOSING ── -->
-      <div style="border-top: 1px solid var(--rule); padding-top: 1.5rem; margin-top: 1rem;">
-        <p style="font-size: 1.05rem; color: var(--ink); line-height: 1.75; font-weight: 400; margin-bottom: 0;">The state of AI in GTM in 2026 is not a technology story. It is a competitive strategy story. The teams that see AI not as a tool to adopt but as an architecture to build are the ones writing the next chapter of B2B revenue.</p>
+      <div style="border-top: 2px solid var(--ink); padding-top: 2rem; margin-top: 0.5rem;">
+        <p style="font-size: 1.05rem; color: var(--ink); line-height: 1.8; font-weight: 400; margin-bottom: 1rem;">The gap between the teams running AI-native revenue infrastructure and the teams still operating on manual workflows is widening every quarter. The good news: the architecture is accessible, the tools are proven, and the talent market — while competitive — is findable. The window to build a meaningful advantage is open. It will not stay open indefinitely.</p>
+        <p style="font-size: 1.05rem; color: var(--ink); line-height: 1.8; font-weight: 400;">If something in this report resonated and you want to think through what it means for your specific situation, I would recommend starting with a clear-eyed audit of your current GTM stack, your team's actual capabilities, and the gap between where your revenue motion is today and where the top quartile is operating. That audit is where the real work begins.</p>
       </div>
 
     </div>
 
     <div class="pull-quote" style="margin-bottom: 0; margin-left: 2rem; margin-right: 2rem;">
-      <p>"The revenue teams I respect most right now are the ones who got the architecture right. They're the ones who got the architecture right and let everything else follow from it. That's still the job."</p>
+      <p>"The revenue teams I recommend following right now are the ones who got the architecture right and let everything else follow from it. That is still the job."</p>
       <cite>Cascade GTM — State of AI in GTM, 2026</cite>
     </div>
-</div>
+
+    <!-- ── CTA STRIP ── -->
+    <div style="background: #1B2B4B; padding: 3.5rem 2.5rem; margin-top: 3rem;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
+        <div style="max-width: 560px;">
+          <p style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem;">CascadeGTM</p>
+          <h2 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 800; color: #FFFFFF; letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 0.75rem;">Ready to continue the conversation?</h2>
+          <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.65;">We work with growth-stage revenue teams to design and implement AI-powered GTM systems. One client at a time. Fully embedded. Built to last.</p>
+        </div>
+        <a href="https://www.cascadegtm.co/connect" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #FFFFFF; color: #1B2B4B; font-family: var(--body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1rem 2rem; border-radius: 4px; text-decoration: none; white-space: nowrap; transition: background 0.15s;">Continue the Conversation →</a>
+      </div>
+    </div>
+
 
 <footer>
   <p>© 2026 <a href="https://www.cascadegtm.co">CascadeGTM</a> · Go-to-market strategy &amp; revenue engineering for the modern age. · <a href="https://www.linkedin.com/company/cascadegtm/" target="_blank">LinkedIn</a></p>
 </footer>
+</div>
 
 </body>
 </html>
