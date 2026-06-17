@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy, Build, or Vibe Code: A GTM Leader's 2026 Stack Decision Guide | CascadeGTM</title>
+<meta name="description" content="The buy versus build answer changed twice in eighteen months. Here is how I decide what to buy, what to build, and when, across the GTM stack, with an interactive matrix.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://langleymerickson-hash.github.io/cascadegtm/buy-build-vibe-code.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Buy, Build, or Vibe Code: A GTM Leader's 2026 Stack Decision Guide">
+<meta property="og:description" content="Buy to reach revenue. Build to defend it. How I decide, category by category and stage by stage.">
+<meta property="og:site_name" content="CascadeGTM">
+<meta property="og:url" content="https://langleymerickson-hash.github.io/cascadegtm/buy-build-vibe-code.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Buy, Build, or Vibe Code: A GTM Leader's 2026 Stack Decision Guide">
+<meta name="twitter:description" content="The buy versus build answer changed twice in eighteen months. Here is the current call, by category and stage.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Buy, Build, or Vibe Code: A GTM Leader's 2026 Stack Decision Guide",
+  "description": "The buy versus build answer changed twice in eighteen months. Here is how I decide what to buy, what to build, and when, across the GTM stack.",
+  "author": { "@type": "Organization", "name": "CascadeGTM", "url": "https://www.cascadegtm.co" },
+  "publisher": { "@type": "Organization", "name": "CascadeGTM", "url": "https://www.cascadegtm.co" },
+  "datePublished": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.cascadegtm.co/thoughts/buy-build-or-vibe-code" },
+  "articleSection": "Go to Market Strategy",
+  "keywords": "build vs buy, vibe coding, GTM engineering, revenue operations, GTM stack, agentic AI, total cost of ownership"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Should I build or buy GTM software?", "acceptedAnswer": { "@type": "Answer", "text": "Buy the tools that get you to revenue and build the ones that defend it. Commodity infrastructure like CRM, billing, contact data, and call recording is a buy at every stage. Build only where your own data makes the output better than anything you can purchase, and only when you have a GTM engineer to maintain it." } },
+    { "@type": "Question", "name": "Has AI and vibe coding changed the build versus buy decision?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, and it changed twice. Around late 2024, AI assistants cut the cost of building. In the last six months, agentic tools started doing the testing, deployment, and maintenance too, which lowered the upkeep that used to make buying the safe call. Builds that did not pay six months ago pay now, as long as you keep a model fallback and a named owner." } },
+    { "@type": "Question", "name": "When does building software become cheaper than buying?", "acceptedAnswer": { "@type": "Answer", "text": "Building turns competitive with buying around the point where you spend about 60,000 dollars a year on a tool. Below that, buying wins on total cost once you include maintenance, which Forrester puts at 15 to 20 percent of the build cost every year." } },
+    { "@type": "Question", "name": "What GTM tools should you never build in house?", "acceptedAnswer": { "@type": "Answer", "text": "Never build billing, CRM, conversation intelligence, contact databases, CPQ, marketing automation, or sales enablement. They carry compliance exposure or rest on data and scale that vendors already own, so building them spends scarce engineering time on solved problems." } },
+    { "@type": "Question", "name": "Do I need a GTM engineer to build internal tools?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Without an owner for the work, a custom build becomes a future outage. GTM engineering job postings grew 205 percent in 2025 because builders who own revenue systems are now the constraint, not more manual headcount." } },
+    { "@type": "Question", "name": "How much does it cost to maintain custom software?", "acceptedAnswer": { "@type": "Answer", "text": "Plan for 15 to 20 percent of the original build cost each year, plus the opportunity cost of the engineer doing upkeep instead of new work. Forrester found that 78 percent of a software product's lifetime cost lands after launch." } }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --ink:#0b121d; --ink-2:#0f1928; --card:#142235; --card-hi:#18293f;
+    --line:rgba(146,176,210,.14); --line-hi:rgba(146,176,210,.26);
+    --paper:#e9eff6; --fog:#aebccd; --fog-2:#6d8097;
+    --buy:#39d3c6; --buildon:#5098f2; --build:#f6a93b;
+    --serif:'Fraunces',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--buy);text-decoration:none;border-bottom:1px solid rgba(57,211,198,.32)}
+  a:hover{border-bottom-color:var(--buy)}
+
+  /* ---------- Nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(11,18,29,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:20px}
+  .brand{font-family:var(--serif);font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--paper);border:none;display:flex;align-items:center;gap:9px}
+  .brand .mark{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--buy),var(--buildon))}
+  .navlinks{margin-left:auto;display:flex;gap:24px;align-items:center}
+  .navlinks a{font-size:13.5px;color:var(--fog);border:none;letter-spacing:.01em}
+  .navlinks a:hover{color:var(--paper)}
+  .navlinks a.cta{border:1px solid var(--line-hi);border-radius:8px;padding:7px 14px;color:var(--paper)}
+  .navlinks a.cta:hover{border-color:var(--buy)}
+  @media(max-width:620px){.navlinks{gap:14px}.navlinks a.nm-hide{display:none}}
+
+  /* ---------- Article ---------- */
+  .post{max-width:720px;margin:0 auto;padding:48px 22px 30px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--buy);font-weight:500}
+  .post h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,48px);line-height:1.06;letter-spacing:-.015em;margin:14px 0 10px}
+  .standfirst{font-size:18.5px;color:var(--fog);margin:0 0 16px}
+  .byline{font-size:13px;color:var(--fog-2);border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:6px}
+  .post h2{font-family:var(--serif);font-weight:700;font-size:clamp(23px,3.6vw,31px);line-height:1.14;letter-spacing:-.01em;margin:44px 0 8px}
+  .post h3{font-size:18px;font-weight:600;color:var(--paper);margin:26px 0 6px}
+  .post p{margin:0 0 16px;font-size:17px}
+  .post ol,.post ul{font-size:17px;padding-left:22px;margin:0 0 16px}
+  .post li{margin-bottom:8px}
+  strong{color:#fff;font-weight:700}
+  blockquote{margin:24px 0;padding:14px 0 14px 20px;border-left:3px solid var(--buy);font-family:var(--serif);font-size:21px;line-height:1.4;color:#fff}
+  blockquote cite{display:block;font-family:var(--sans);font-size:13px;font-style:normal;color:var(--fog-2);margin-top:8px}
+  .role{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);padding:16px 18px;margin:0 0 12px}
+  .role .r{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--build);font-weight:600;margin-bottom:6px}
+  .role p{margin:0;font-size:15.5px;color:var(--fog)}
+  .faq h3{font-family:var(--serif);font-size:19px;font-weight:700;color:#fff}
+
+  /* ---------- Tool / matrix section ---------- */
+  .tool{max-width:1180px;margin:40px auto 0;padding:40px 22px 30px;border-top:1px solid var(--line)}
+  .tool .eyebrow{color:var(--build)}
+  .tool h2{font-family:var(--serif);font-weight:700;font-size:clamp(24px,4vw,38px);line-height:1.05;letter-spacing:-.015em;margin:10px 0 8px}
+  .tool h2 em{font-style:italic;color:transparent;background:linear-gradient(100deg,var(--buy),var(--buildon));-webkit-background-clip:text;background-clip:text}
+  .toolsub{color:var(--fog);max-width:64ch;margin:0;font-size:15px}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin:22px 0 14px}
+  .lg{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--fog)}
+  .sw{width:13px;height:13px;border-radius:4px;flex:none}
+  .sw.buy{background:var(--buy)} .sw.buildon{background:var(--buildon)} .sw.build{background:var(--build)}
+
+  .scrollx{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--ink-2)}
+  .matrix{display:grid;grid-template-columns:minmax(186px,1.5fr) repeat(4,minmax(96px,1fr));min-width:640px}
+  .hcell,.rowlabel,.cell{border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  .matrix > *:nth-child(5n+1){border-left:none}
+  .corner{padding:14px;position:sticky;left:0;background:var(--ink-2);z-index:3;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  .corner .t{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--fog-2)}
+  .hcell{padding:13px 12px 11px;cursor:pointer;background:var(--ink-2);transition:background .15s}
+  .hcell:hover{background:var(--card)}
+  .hcell .stg{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1}
+  .hcell .rng{font-family:var(--mono);font-size:10px;color:var(--fog-2);margin-top:4px;display:block}
+  .minibar{display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:9px;background:rgba(255,255,255,.05)}
+  .minibar span{display:block}
+  .minibar .b1{background:var(--buy)} .minibar .b2{background:var(--buildon)} .minibar .b3{background:var(--build)}
+  .rowlabel{padding:11px 14px;position:sticky;left:0;background:var(--ink-2);z-index:2;display:flex;flex-direction:column;justify-content:center;gap:3px}
+  .rowlabel .nm{font-size:13.5px;font-weight:500;line-height:1.2}
+  .rowlabel .pb{font-size:11px;color:var(--fog-2);line-height:1.25}
+  .cell{cursor:pointer;padding:12px 10px;display:flex;align-items:center;justify-content:center;gap:7px;position:relative;transition:filter .12s;min-height:58px}
+  .cell:hover{filter:brightness(1.18)}
+  .cell .dot{width:8px;height:8px;border-radius:50%;flex:none}
+  .cell .vl{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;font-weight:500;white-space:nowrap}
+  .cell.v-buy{background:rgba(57,211,198,.10)} .cell.v-buy .dot{background:var(--buy)} .cell.v-buy .vl{color:var(--buy)}
+  .cell.v-buildon{background:rgba(80,152,242,.12)} .cell.v-buildon .dot{background:var(--buildon)} .cell.v-buildon .vl{color:var(--buildon)}
+  .cell.v-build{background:rgba(246,169,59,.13)} .cell.v-build .dot{background:var(--build)} .cell.v-build .vl{color:var(--build)}
+  .cell.sel{box-shadow:inset 0 0 0 2px var(--paper)}
+  .cell.coldim{opacity:.32}
+  .cell:focus-visible{outline:2px solid var(--paper);outline-offset:-2px}
+
+  .detail{margin-top:18px;border:1px solid var(--line-hi);border-radius:14px;background:var(--card);padding:22px 22px 20px;min-height:120px}
+  .detail.empty{display:flex;align-items:center;justify-content:center;color:var(--fog-2);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+  .detail .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+  .detail .deye{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fog-2)}
+  .vbadge{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:4px 10px;border-radius:999px}
+  .vbadge.v-buy{background:rgba(57,211,198,.14);color:var(--buy)}
+  .vbadge.v-buildon{background:rgba(80,152,242,.16);color:var(--buildon)}
+  .vbadge.v-build{background:rgba(246,169,59,.16);color:var(--build)}
+  .detail h3{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.12;margin:6px 0 14px;letter-spacing:-.012em}
+  .stagecall{border-left:3px solid var(--line-hi);padding:8px 0 8px 14px;margin:0 0 16px;font-size:14.5px}
+  .stagecall.v-buy{border-color:var(--buy)} .stagecall.v-buildon{border-color:var(--buildon)} .stagecall.v-build{border-color:var(--build)}
+  .lab{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--buy);margin:14px 0 5px}
+  .detail p{margin:0;font-size:14px;line-height:1.55;color:var(--paper)}
+  .detail .cost{font-family:var(--mono);font-size:12px;color:var(--fog);margin-top:4px}
+  .grid2{display:flex;gap:26px;flex-wrap:wrap}
+  .grid2 > div{flex:1;min-width:230px}
+
+  .builddetails{border:1px solid rgba(246,169,59,.3);background:rgba(246,169,59,.06);border-radius:12px;padding:14px 16px;margin-top:16px}
+  .bdh{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--build);margin-bottom:11px}
+  .bdrow{display:flex;gap:12px;margin-bottom:9px}
+  .bdrow:last-child{margin-bottom:0}
+  .bdk{flex:0 0 116px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--fog-2);padding-top:2px}
+  .bdv{flex:1;font-size:13px;line-height:1.5;color:var(--paper)}
+
+  .arch{display:flex;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding:10px 2px 8px;margin-top:4px}
+  .anode{flex:0 0 auto;min-width:120px;max-width:176px;border-radius:11px;padding:10px 12px;text-align:center;border:1px solid var(--line-hi);background:var(--ink-2);display:flex;flex-direction:column;justify-content:center;gap:4px}
+  .anode .atag{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fog-2)}
+  .anode .aname{font-size:12.5px;font-weight:500;line-height:1.22;color:var(--paper)}
+  .anode.src{border-style:dashed}
+  .anode.src .aname,.anode.sys .aname{color:var(--fog)}
+  .anode.core{border-color:var(--buy);background:rgba(57,211,198,.08)}
+  .anode.core .atag{color:var(--buy)} .anode.core .aname{color:var(--buy);font-weight:600}
+  .anode.build{border-color:var(--build);background:rgba(246,169,59,.10);box-shadow:0 0 0 3px rgba(246,169,59,.07)}
+  .anode.build .atag{color:var(--build)} .anode.build .aname{color:var(--build);font-weight:600}
+  .aconn{flex:0 0 auto;min-width:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:0 5px}
+  .adata{font-family:var(--mono);font-size:9.5px;color:var(--fog);background:rgba(146,176,210,.08);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap;line-height:1.1}
+  .aline{position:relative;width:100%;height:2px;background:linear-gradient(90deg,var(--line-hi),var(--fog-2))}
+  .aline::after{content:"";position:absolute;right:-1px;top:-4px;width:0;height:0;border-left:7px solid var(--fog-2);border-top:5px solid transparent;border-bottom:5px solid transparent}
+
+  .princ{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .chip{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);padding:15px 16px}
+  .chip .ct{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--build);margin-bottom:7px}
+  .chip p{margin:0;font-size:12.5px;line-height:1.5;color:var(--fog)}
+  .chip p b{color:var(--paper);font-weight:600}
+
+  footer{max-width:720px;margin:40px auto 0;padding:24px 22px 70px;border-top:1px solid var(--line);font-size:13px;color:var(--fog-2)}
+  footer a{color:var(--fog)}
+
+  @media(max-width:560px){
+    .rowlabel .pb{display:none}.cell .vl{display:none}.cell{min-height:48px}
+    .bdrow{flex-direction:column;gap:2px}.bdk{flex:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  /* ---------- What-changed timeline boxes ---------- */
+  .shifts{margin:20px 0 8px}
+  .shift{border:1px solid var(--line);border-left:3px solid var(--buy);border-radius:12px;background:var(--ink-2);padding:18px 20px;margin-bottom:14px}
+  .shift .when{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--buy);margin-bottom:7px}
+  .shift h3{margin:0 0 8px;font-size:19px;font-weight:600;color:#fff}
+  .shift p{margin:0 0 10px;font-size:15.5px;color:var(--fog)}
+  .shift p:last-child{margin-bottom:0}
+  .shift p strong{color:#fff}
+  .shift.now{border-left-color:var(--build)}
+  .shift.now .when{color:var(--build)}
+  .callout{border:1px solid rgba(246,169,59,.32);background:rgba(246,169,59,.07);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--build);margin-bottom:7px}
+  .callout p{margin:0;font-size:15px;color:var(--paper)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="https://www.cascadegtm.co/"><span class="mark"></span>CascadeGTM</a>
+    <div class="navlinks">
+      <a href="https://www.cascadegtm.co/" class="nm-hide">Home</a>
+      <a href="https://www.cascadegtm.co/services" class="nm-hide">Services</a>
+      <a href="https://langleymerickson-hash.github.io/cascadegtm/">Thoughts</a>
+      <a href="https://www.cascadegtm.co/connect" class="cta">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<article class="post">
+  <div class="eyebrow">CascadeGTM Thoughts</div>
+  <h1>Buy, Build, or Vibe Code</h1>
+  <p class="standfirst">The buy versus build answer changed twice in eighteen months. Here is how I decide what goes in a GTM stack today, with an interactive matrix you can work through by stage.</p>
+  <div class="byline">By CascadeGTM, GTM strategy and revenue engineering. Published June 2026.</div>
+
+  <p>For decades, growth stage companies have wrestled with one question. Build it, or buy it. For most of those years the answer stayed clear. You bought, unless you had a surplus of skilled engineers to spare or a business critical problem you could not solve any other way. The logic held. The engineers who can build a high performance revenue engine can also build your product, and your product is what wins customers and builds your moat. Internal tools do not. So you bought your stack, and you pulled engineers onto attribution, scoring, or routing only when you had no other option, usually with some reluctance.</p>
+  <p>That logic started to crack about eighteen months ago. Over the last six months it broke. The matrix below gives you my call for every category at every stage. Then I walk through what changed, what to do in your next budget cycle, and the rule that holds it all together.</p>
+</article>
+
+<section class="tool" id="matrix">
+  <div class="eyebrow">CascadeGTM Decision Tool</div>
+  <h2>The Buy, Build, or <em>Vibe Code</em> Matrix</h2>
+  <p class="toolsub">Seventeen GTM categories across four stages. Each cell is the call at that stage. Tap a cell for the reasoning, the default tool, the cost, and, on every build, the exact stack a GTM engineer would use to build, host, maintain, and secure it.</p>
+
+  <div class="legend">
+    <span class="lg"><span class="sw buy"></span>Buy. The vendor's data, scale, or compliance moat beats anything you would build</span>
+    <span class="lg"><span class="sw buildon"></span>Buy and build on. Buy the platform, build the connective tissue</span>
+    <span class="lg"><span class="sw build"></span>Build or vibe code. Custom fit on proprietary data drives the lift</span>
+  </div>
+
+  <div class="scrollx"><div class="matrix" id="matrixgrid"></div></div>
+  <div class="detail empty" id="detail">Tap any cell to see the call, the tool, the cost, and the build details</div>
+
+  <div class="princ">
+    <div class="chip"><div class="ct">The crossover</div><p>Building turns competitive with SaaS around <b>~$60K a year</b> of tool spend. Below that, buying wins on total cost.</p></div>
+    <div class="chip"><div class="ct">Two kinds of build</div><p>Label every build <b>build to learn</b> (prototype) or <b>build to run</b> (production with SLAs). Treat a prototype like a product and you pay for it later.</p></div>
+    <div class="chip"><div class="ct">The new variable</div><p>Model access moves. Keep your model layer <b>swappable</b>, since a policy change can pull a frontier model overnight.</p></div>
+    <div class="chip"><div class="ct">Hard line</div><p>Anything touching <b>PII or payments</b> is a buy. Custom agents add prompt injection, data egress, and secrets you now own.</p></div>
+  </div>
+</section>
+
+<article class="post">
+  <h2>What changed in the last eighteen months, and the last six</h2>
+  <p>Two shifts moved the line, and they are not the same shift. Read the markers, not every word.</p>
+
+  <div class="shifts">
+    <div class="shift">
+      <div class="when">Eighteen months ago</div>
+      <h3>Building got faster</h3>
+      <p>AI coding assistants got good enough to matter. Cursor, GitHub Copilot, and Claude wrote real code, and a developer shipped a working tool in a fraction of the old time. Build cost fell by half or more.</p>
+      <p>Maintenance cost did not move. So the math still favored buying anything you planned to run for years. Forrester's 2024 research is the reason why. <strong>Seventy eight percent of a software product's lifetime cost lands after launch</strong>, and upkeep runs 15 to 20 percent of the build budget every year.</p>
+    </div>
+
+    <div class="shift">
+      <div class="when">The last six months</div>
+      <h3>The agents started maintaining the build</h3>
+      <p>Coding moved from autocomplete to agentic. Claude Code, Claude Cowork, and tools like them now plan, write, test, deploy, and refactor on their own. They do the unglamorous work that used to eat your engineers.</p>
+      <p>Claude Fable 5, released June 9, 2026, shows the ceiling. Simon Willison called it <q>something of a beast</q>. He handed it a real senior engineer task, it finished the work, found and fixed four issues in his underlying library, and wrote the tests and the docs. A few hours of his time turned into what felt like several days of work. <strong>Fable scored 80.3 percent on SWE-bench Pro at launch.</strong></p>
+    </div>
+
+    <div class="callout">
+      <div class="ct">The new risk, model access moves</div>
+      <p>Three days after launch, a US export control directive forced Anthropic to <a href="https://www.anthropic.com/news/fable-mythos-access" rel="nofollow">suspend Fable 5</a> for every customer worldwide. Build on a single frontier model with no fallback, and a policy change takes your tool offline overnight. So build, and keep your model layer swappable.</p>
+    </div>
+
+    <div class="shift now">
+      <div class="when">Today</div>
+      <h3>What I would build now that I would not have six months ago</h3>
+      <p>I told teams to buy enrichment, attribution, and competitive intel, because the build was cheap and the upkeep was not. Today I build them. A research and enrichment agent that replaces three point tools. A lead scoring model wired to your data, with the agent writing the tests and docs. A competitor monitoring agent that repairs its own scrapers. An internal agent that answers questions across your CRM and warehouse. Each was a maintenance headache six months ago. Now the agent carries that load and one GTM engineer keeps the set running.</p>
+    </div>
+  </div>
+
+  <p>Most teams are running AI experiments right now. Most of the SDR pilots this year were exactly that, pilots that never scaled. A pilot is not a revenue engine. Building is easier than it has ever been and the tools are more powerful than ever. With the right GTM engineer, you build differentiating tooling and a revenue engine efficient enough to carry you to your next growth horizon.</p>
+
+  <h2>What to do in your next budget cycle</h2>
+  <p>Walk into <a href="https://www.cascadegtm.co/connect">planning</a> with a clear position by role.</p>
+  <div class="role"><div class="r">CFOs and founders</div><p>Treat buying as a predictable line item with vendor support behind it. Treat building as an asset you staff, secure, and maintain. Fund a build only above the roughly sixty thousand dollar a year mark, because below that the subscription costs less than the engineer hours to build and run your own version, and fund it only where it compounds into an advantage you keep. Then fund the person who makes building pay. Add headcount for a senior GTM engineer, the profile who builds your revenue engine with LLMs doing the heavy lifting. Pay them like the engineers they are. GTM engineers earn engineering grade salaries, and the strong ones carry variable pay tied to pipeline produced or revenue booked, which keeps the build pointed straight at the number.</p></div>
+  <div class="role"><div class="r">CROs, CMOs, and CCOs</div><p>Build only when the work is a core differentiator that moves pipeline, win rate, retention, or cash collected in a way buying cannot. Everything else is a buy. And make sure a true GTM engineer supports the team, because a build without an owner becomes an outage with your name on it.</p></div>
+  <div class="role"><div class="r">GTM ops and engineering</div><p>Hold a clear line. Buy commodities, and never spend your hours rebuilding a CRM or a billing system. Build the differentiators that amplify revenue, the scoring, the routing, the signal work that matches how you sell. Then manage what you build. Promote the few builds that earn their place onto one maintained layer with a named owner and an off switch. Take a hard look at your roadmap and cut the builds that do not pay. Most teams are running experiments right now, so protect real time for maintenance, because the build you shipped last quarter still needs you this quarter.</p></div>
+
+  <h2>My rule still holds, buy to reach revenue, build to defend it</h2>
+  <p>The tools changed. The rule did not. Buy the things that get you to revenue. Build the things that defend and grow it. Commodity infrastructure is a buy, because every competitor has the same options and you gain nothing by writing your own. Your edge lives in the connective tissue, the scoring, the signal routing, the workflows that match how your team sells. That is where a build earns its keep.</p>
+  <h3>Six questions I ask before any build</h3>
+  <ol>
+    <li>Is this a core differentiator for us, or a commodity everyone has?</li>
+    <li>Does a category leader already solve it well at our size?</li>
+    <li>Who owns this after launch, and do they have the time?</li>
+    <li>What is the security and compliance exposure if we own it?</li>
+    <li>What is the real five year cost, including maintenance and the engineer's hours?</li>
+    <li>Does building move pipeline, win rate, or retention in a way buying cannot?</li>
+  </ol>
+  <p>If you cannot name the owner in question three, stop. You do not have a build. You have a future outage with your logo on it.</p>
+
+  <h2>Where building pays across the GTM stack</h2>
+  <p>I mapped all seventeen categories in the <a href="#matrix">matrix at the top of this page</a>. Tap any cell to see the call at that stage, the default tool, the cost, and for every build, the exact stack a GTM engineer would use. A few patterns hold no matter the company.</p>
+  <h3>The hard buys you should never build</h3>
+  <p>Some categories stay a buy at every stage. Billing leads that list. Payments and revenue recognition carry PCI scope and ASC 606 rules, so you buy Stripe and move on. Conversation intelligence is a buy because the transcription quality and the model are the vendor's moat. Contact data is a buy because no one out researches a database with hundreds of millions of verified records. CRM, CPQ, marketing automation, and sales enablement round out the group. Building any of them spends your scarce engineering time on a problem solved years ago.</p>
+  <h3>The real build candidates</h3>
+  <p>The build zone is narrow and specific, and that is the point. Lead deduplication tuned to your data. A signal routing layer on a raw intent feed. Custom attribution that weights touchpoints the way your deals close. A competitor monitoring agent. Customer health scoring on your product usage. Each sits on bought infrastructure and runs on data only you have. That is the test. Build where your data makes the output better than anything on the market, and read the <a href="https://langleymerickson-hash.github.io/cascadegtm/#playbook">data architecture work</a> that has to come first.</p>
+  <p>Building got cheap. Owning still costs. The companies that win treat that gap with respect. They buy to reach revenue, build to defend it, and maintain what they build. If you want help drawing that line for your own stack, <a href="https://www.cascadegtm.co/connect">start a conversation with us</a>.</p>
+
+  <div class="faq">
+    <h2>Common questions</h2>
+    <h3>Should I build or buy GTM software?</h3>
+    <p>Buy the tools that get you to revenue and build the ones that defend it. Commodity infrastructure like CRM, billing, contact data, and call recording is a buy at every stage. Build only where your own data makes the output better than anything you can purchase, and only when you have a GTM engineer to maintain it.</p>
+    <h3>Has AI and vibe coding changed the build versus buy decision?</h3>
+    <p>Yes, and it changed twice. Around late 2024, AI assistants cut the cost of building. In the last six months, agentic tools started doing the testing, deployment, and maintenance too, which lowered the upkeep that used to make buying the safe call. Builds that did not pay six months ago pay now, as long as you keep a model fallback and a named owner.</p>
+    <h3>When does building software become cheaper than buying?</h3>
+    <p>Building turns competitive with buying around the point where you spend about sixty thousand dollars a year on a tool. Below that, buying wins on total cost once you include maintenance, which Forrester puts at 15 to 20 percent of the build cost every year.</p>
+    <h3>What GTM tools should you never build in house?</h3>
+    <p>Never build billing, CRM, conversation intelligence, contact databases, CPQ, marketing automation, or sales enablement. They carry compliance exposure or rest on data and scale that vendors already own. Work through the full breakdown in the <a href="#matrix">matrix at the top of this page</a>.</p>
+    <h3>Do I need a GTM engineer to build internal tools?</h3>
+    <p>Yes. Without an owner for the work, a custom build becomes a future outage. GTM engineering job postings grew 205 percent in 2025 because builders who own revenue systems are now the constraint, not more manual headcount.</p>
+    <h3>How much does it cost to maintain custom software?</h3>
+    <p>Plan for 15 to 20 percent of the original build cost each year, plus the opportunity cost of the engineer doing upkeep instead of new work. Forrester found that 78 percent of a software product's lifetime cost lands after launch.</p>
+  </div>
+</article>
+
+
+<footer>
+  Sources and further reading: <a href="https://simonwillison.net/2026/Jun/9/claude-fable-5/" rel="nofollow">Simon Willison on Claude Fable 5</a>, <a href="https://forstarters.substack.com/p/for-starters-72-vibe-code-vs-buy" rel="nofollow">For Starters on vibe code versus buy</a>, and <a href="https://hatchworks.com/blog/gen-ai/build-vs-buy-framework/" rel="nofollow">Hatchworks build versus buy framework</a>. Cost and maintenance figures from Forrester 2024 research. GTM engineering hiring data from the CascadeGTM State of AI in GTM report.
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  const STAGES=[
+    {k:"s0",stg:"Seed",rng:"Pre-rev to $1M",line:"Buy everything. Build nothing, since you have no proprietary data to differentiate on and no one to maintain a build."},
+    {k:"s1",stg:"Series A",rng:"$1M to $5M",line:"Buy the stack. Vibe code only the connective tissue, like Clay plus Claude, as your first GTM engineer lands."},
+    {k:"s2",stg:"Series B",rng:"$5M to $20M",line:"The crossover. With a GTM engineer and proprietary data, build the differentiated middle on top of bought systems of record."},
+    {k:"s3",stg:"Series C+",rng:"$20M+",line:"Buy enterprise platforms. Build a governed portfolio of owned agents where custom fit compounds."}
+  ];
+  const VLABEL={buy:"Buy",buildon:"+ Build",build:"Build"};
+  const VFULL={buy:"Buy",buildon:"Buy + Build-on",build:"Build / Vibe-code"};
+
+  const CATS=[
+    {nm:"CRM",pb:"One source of truth for pipeline and accounts",
+     buy:"HubSpot for Series A to C, then Salesforce at Series C and up",cost:"HubSpot seat tiers, then Salesforce from $165 per user a month",
+     build:"Never build the CRM. Build only custom objects, fields, and automations on top of the platform.",v:["buy","buy","buy","buy"]},
+    {nm:"Prospecting & Engagement",pb:"Rep efficiency and multichannel sequencing",
+     buy:"Apollo for Seed to B, then Outreach or Salesloft at B and up",cost:"Apollo from $49 per user a month, Outreach or Salesloft around $100 per user and up",
+     build:"At Series B and up, build custom signal triggered sequencing logic the platform cannot express, and keep the sequencer you bought.",
+     reason:"custom signal to sequence logic on top of the platform",
+     bd:{build:"A Python or TypeScript service that catches signal webhooks and decides the sequence, timing, and owner. One LLM call selects the message. The sequencer API (Outreach, Salesloft, Apollo) does the sending.",host:"Serverless functions on AWS Lambda or Vercel, or a small container on Fly.io, with a queue or a light runner like Temporal for retries.",maintain:"Version the routing rules in git and add a test for each rule path. Watch reply and meeting rates by branch.",secure:"Secrets in a manager, sequencer tokens scoped to send only, and every send logged for audit."},
+     v:["buy","buy","buildon","buildon"]},
+    {nm:"Revenue Data & Intelligence",pb:"Contact and account coverage and accuracy",
+     buy:"Apollo for Seed to B, then ZoomInfo at B and up, Cognism for the EU",cost:"Apollo from $49 per user a month, ZoomInfo enterprise pricing",
+     build:"Never build a contact database, since the data moat is the vendor's. At Series B and up, build the enrichment routing layer that picks which provider to call and when.",
+     reason:"build the enrichment routing, not the database",
+     bd:{build:"A function that takes a record, finds the missing fields, and calls providers in priority order until they fill. Python or TypeScript, or run it inside Clay with HTTP enrichments. Providers like Apollo, ZoomInfo, and Clearbit sit behind it.",host:"A queue worker on AWS, or a Clay table if you stay low code.",maintain:"Track find rate and cost per provider, and reorder the waterfall as rates move.",secure:"Encrypt records in transit, drop PII from logs, and cache nothing longer than you need."},
+     v:["buy","buy","buildon","buildon"]},
+    {nm:"ABM & Buying Intent",pb:"Which accounts are in market right now",
+     buy:"Bombora for the raw signal, 6sense at Series B and up",cost:"Bombora about $25K a year, 6sense $60K and up, Demandbase median about $66K",
+     build:"At Series B and up with RevOps capacity, buy the raw Bombora feed and build your own signal routing layer instead of a full ABM platform.",
+     reason:"build your own signal layer on a raw intent feed",
+     bd:{build:"Ingest the Bombora or intent feed, match it to your ICP and CRM accounts, score, and route to the right play. SQL plus Python, in a warehouse like BigQuery or Snowflake, with reverse ETL (Hightouch or Census) pushing to the CRM.",host:"Warehouse native scheduled jobs.",maintain:"Tune thresholds monthly against reply and meeting rates.",secure:"Row level access in the warehouse and service accounts with least privilege."},
+     v:["buy","buy","build","build"]},
+    {nm:"Data Orchestration",pb:"Data coherence and enrichment at scale",
+     buy:"Clay, a must-have at every stage",cost:"Clay about $185 to $495 a month plus credits",
+     build:"Clay is the build substrate, not the thing you replace. From Series A, orchestrate tool calls within agents on top of it.",
+     reason:"build on Clay with tool calls within agents",
+     bd:{build:"Agent workflows on top of Clay that research, verify, and write back. Clay HTTP and AI columns, a model like Claude via API, and your CRM API for write back. Add Python only for logic Clay cannot express.",host:"Clay runs it. Add a thin service only when you outgrow the table.",maintain:"Watch token spend and write back errors, and keep prompts in version control.",secure:"Scope the CRM token to specific objects and review the agent write permissions."},
+     v:["buy","buildon","buildon","buildon"]},
+    {nm:"Forecasting",pb:"Predictable, defensible revenue numbers",
+     buy:"Forecastio for A to B, then Clari at B and up",cost:"Forecastio flat rate, Clari enterprise pricing",
+     build:"Light pipeline analytics early is fine. Do not build a forecasting engine, since the model needs data scale you do not have yet.",v:["buy","buy","buy","buy"]},
+    {nm:"Conversation Intelligence",pb:"Capture, transcribe, and coach on calls",
+     buy:"Gong at every stage, Clari Copilot if you run Clari",cost:"Gong premium per seat",
+     build:"Never build. The transcription quality and the model are the vendor's moat.",v:["buy","buy","buy","buy"]},
+    {nm:"Automation & Integration",pb:"Connecting systems without manual handoffs",
+     buy:"Zapier early, Make at Series B, Workato past $100M",cost:"Zapier low, Make about $200 to $400 a month, Workato enterprise",
+     build:"Buy the connectors and build the decision logic between them at Series B and up.",
+     reason:"build the logic, buy the connectors",
+     bd:{build:"Keep the connectors you bought (Make, Zapier, Workato) and write the branching logic as a small service they call. TypeScript or Python behind a webhook.",host:"A serverless function that the no code platform calls with a webhook step.",maintain:"Unit test each branch and log inputs and outputs.",secure:"Validate webhook signatures, keep secrets in a vault, and hold business logic in code you can test, not in the no code tool."},
+     v:["buy","buy","buildon","buildon"]},
+    {nm:"Marketing Automation",pb:"Demand gen, nurture, and email at scale",
+     buy:"HubSpot for Seed to B, then Marketo at B and up",cost:"HubSpot marketing tiers, Marketo enterprise",
+     build:"Do not build. Low differentiation, high maintenance, and the platform handles deliverability better than you will.",v:["buy","buy","buy","buy"]},
+    {nm:"Data Quality",pb:"Dedup, normalization, and lead routing",
+     buy:"LeanData for routing-heavy Salesforce orgs",cost:"LeanData per org licensing",
+     build:"A strong build at Series B and up. Custom dedupe and normalization tuned to your data is high leverage and contained.",
+     reason:"custom dedupe and normalization tuned to your data",
+     bd:{build:"A service that intercepts inbound records, matches against existing CRM data, merges duplicates, and standardizes fields before write. Python with rapidfuzz or recordlinkage for matching, or TypeScript, plus one LLM call for fuzzy company name resolution.",host:"A queue worker (AWS SQS and Lambda) or a small container on Fly.io or Render. The CRM API or a reverse ETL layer handles write back.",maintain:"A test suite of known duplicate pairs, a weekly precision and recall report, and the matching rules versioned in git.",secure:"Least privilege CRM token, PII encrypted in transit and at rest, every merge logged for rollback, and a human review queue for low confidence matches."},
+     v:["buy","buy","build","build"]},
+    {nm:"CPQ",pb:"Fast, accurate, approved quotes",
+     buy:"DealHub for growth, Conga or Salesforce CPQ at enterprise",cost:"DealHub mid-market, Conga or Salesforce CPQ enterprise",
+     build:"Never build quoting. Pricing, discount approvals, and contract terms carry direct revenue and legal risk.",v:["buy","buy","buy","buy"]},
+    {nm:"Sales Enablement",pb:"Content findability and rep coaching",
+     buy:"Highspot and Seismic at Series B and up, Mindtickle for coaching",cost:"Highspot and Seismic enterprise per seat",
+     build:"Do not build. A commodity capability with no proprietary data advantage to capture.",v:["buy","buy","buy","buy"]},
+    {nm:"Revenue Attribution",pb:"Which GTM investments drive pipeline",
+     buy:"Dreamdata, then HockeyStack past $20M",cost:"Dreamdata from about $750 a month, HockeyStack from $2,200 a month",
+     build:"A build at scale, Series C and up, once you have data engineering. A custom attribution model tuned to your motion beats a generic one.",
+     reason:"custom attribution model, needs data engineering",
+     bd:{build:"A model that ingests every touchpoint and assigns credit your way, first touch, multi touch, or custom weights. A warehouse like Snowflake or BigQuery, dbt for transforms, and a Python service or notebook for the model. This one needs data engineering.",host:"Warehouse plus a scheduled job.",maintain:"Document the model and reconcile it to closed revenue every month.",secure:"Warehouse access controls and no raw PII in reporting tables."},
+     v:["buy","buy","buy","build"]},
+    {nm:"Competitive Intelligence",pb:"Keeping battlecards current",
+     buy:"Kompyte, Klue, or Crayon",cost:"Kompyte about $15K to $25K a year, Klue and Crayon higher",
+     build:"A build at Series B and up. A competitor monitoring agent that drafts battlecard updates works well, as long as you budget for upkeep.",
+     reason:"a competitor monitoring agent, watch the upkeep",
+     bd:{build:"An agent that watches competitor pages, pricing, and news, then drafts battlecard updates for review. A headless browser like Playwright for capture, a model via API for summarizing changes, and your enablement tool or CRM for delivery. Python or TypeScript.",host:"A scheduled job on AWS or a cron container.",maintain:"Budget for upkeep, since scrapers break when sites change, and keep a human in the loop before anything publishes.",secure:"Respect robots and terms, rate limit requests, and store only what you need."},
+     v:["buy","buy","build","build"]},
+    {nm:"Billing & Subscriptions",pb:"Payments, dunning, and revenue recognition",
+     buy:"Stripe for Seed to D, then Chargebee, then Zuora past $50M",cost:"Stripe a percent of volume, Chargebee free to $249 a month, Zuora $50K and up",
+     build:"A hard no. PCI scope and ASC 606 rules make this the one category you never build.",v:["buy","buy","buy","buy"]},
+    {nm:"Customer Success",pb:"Churn risk and expansion signals",
+     buy:"Totango free for Seed to B, ChurnZero for B to D, Gainsight past $50M",cost:"Totango free tier, ChurnZero mid-market, Gainsight enterprise",
+     build:"A build at Series B and up. Custom health scoring on your product usage data is differentiated and contained. Buy the platform, build the score.",
+     reason:"custom health scoring on product usage data",
+     bd:{build:"A scoring service that reads product usage events plus support and billing signals and writes a risk score back to your CS platform. Your event stream (Segment or a warehouse), Python for the score, and reverse ETL to push it.",host:"A warehouse native job or a small service.",maintain:"Check the score against actual churn each quarter and retune.",secure:"Aggregate usage data, restrict the scoring tables, and log score changes."},
+     v:["buy","buy","build","build"]},
+    {nm:"Foundation LLMs",pb:"The intelligence layer under everything",
+     buy:"Claude, ChatGPT, or Gemini via API",cost:"Claude Sonnet $3 and $15 per million tokens, in and out",
+     build:"You never build the model. You consume it. Everything you build sits on this layer, so route the right model to each job and keep a fallback ready.",v:["buy","buy","buy","buy"]}
+  ];
+
+  // Architecture models, index-aligned to CATS. n = nodes, e = data label on each connection.
+  const ARCH=[
+    {buy:{c:"Every system writes to one record",n:[{l:"Prospecting + marketing",t:"sys"},{l:"CRM",t:"core"},{l:"Forecasting, billing, CS",t:"sys"}],e:["new contacts","deals + accounts"]}},
+    {buy:{c:"The sequencer sends from your data",n:[{l:"Contact data",t:"sys"},{l:"Sequencer",t:"core"},{l:"CRM",t:"sys"}],e:["target list","activity + replies"]},
+     build:{c:"A signal picks the moment to send",n:[{l:"Buying signal",t:"src"},{l:"Build: routing logic",t:"build"},{l:"Sequencer + CRM",t:"sys"}],e:["intent event","who + when to send"]}},
+    {buy:{c:"Vendor data fills your records",n:[{l:"CRM gaps",t:"src"},{l:"Data vendor",t:"core"},{l:"Enriched CRM",t:"sys"}],e:["missing fields","verified data"]},
+     build:{c:"An agent picks the cheapest source per field",n:[{l:"Missing field",t:"src"},{l:"Build: waterfall router",t:"build"},{l:"Enriched record",t:"sys"}],e:["lookup request","cheapest match"]}},
+    {buy:{c:"The platform scores accounts and alerts sales",n:[{l:"Intent + web data",t:"src"},{l:"6sense",t:"core"},{l:"CRM alerts",t:"sys"}],e:["raw signals","account score"]},
+     build:{c:"You route raw intent to the right play",n:[{l:"Bombora feed",t:"src"},{l:"Build: signal router",t:"build"},{l:"Sequencer + CRM",t:"sys"}],e:["surge data","routed play"]}},
+    {buy:{c:"Clay enriches a list from many sources",n:[{l:"Account list",t:"src"},{l:"Clay",t:"core"},{l:"CRM",t:"sys"}],e:["rows to enrich","clean records"]},
+     build:{c:"An agent researches, then writes back",n:[{l:"Trigger",t:"src"},{l:"Build: Claygent + tool calls",t:"build"},{l:"CRM + sequencer",t:"sys"}],e:["research task","written-back data"]}},
+    {buy:{c:"Activity and pipeline feed one forecast",n:[{l:"CRM + call data",t:"sys"},{l:"Clari",t:"core"},{l:"Revenue forecast",t:"sys"}],e:["pipeline + activity","weighted call"]}},
+    {buy:{c:"Calls become notes and coaching",n:[{l:"Call or meeting",t:"src"},{l:"Gong",t:"core"},{l:"CRM + coaching",t:"sys"}],e:["audio","notes + scores"]}},
+    {buy:{c:"Connectors move data on a rule",n:[{l:"App A",t:"sys"},{l:"Make or Zapier",t:"core"},{l:"App B",t:"sys"}],e:["trigger event","mapped record"]},
+     build:{c:"You write the decision, connectors carry it",n:[{l:"Event",t:"src"},{l:"Build: decision logic",t:"build"},{l:"Connected systems",t:"sys"}],e:["raw event","the decision"]}},
+    {buy:{c:"One platform runs nurture end to end",n:[{l:"Lead capture",t:"src"},{l:"HubSpot or Marketo",t:"core"},{l:"CRM handoff",t:"sys"}],e:["form fills","qualified leads"]}},
+    {buy:{c:"A routing tool assigns clean leads",n:[{l:"New lead",t:"src"},{l:"LeanData",t:"core"},{l:"Owner in CRM",t:"sys"}],e:["raw lead","matched + routed"]},
+     build:{c:"An agent dedupes and normalizes on write",n:[{l:"Inbound record",t:"src"},{l:"Build: dedupe + normalize",t:"build"},{l:"Clean CRM",t:"sys"}],e:["messy record","clean record"]}},
+    {buy:{c:"A quote pulls price rules and pushes a contract",n:[{l:"Opportunity",t:"src"},{l:"DealHub CPQ",t:"core"},{l:"Contract + billing",t:"sys"}],e:["line items","approved quote"]}},
+    {buy:{c:"The right content surfaces in the deal",n:[{l:"Deal stage",t:"sys"},{l:"Highspot",t:"core"},{l:"Rep in the call",t:"sys"}],e:["deal context","right content"]}},
+    {buy:{c:"Touchpoints tie to closed revenue",n:[{l:"Marketing + CRM",t:"sys"},{l:"Dreamdata",t:"core"},{l:"Pipeline by source",t:"sys"}],e:["touchpoints","credited pipeline"]},
+     build:{c:"Your model weights touches your way",n:[{l:"Touchpoint data",t:"src"},{l:"Build: attribution model",t:"build"},{l:"Pipeline by source",t:"sys"}],e:["all touches","weighted credit"]}},
+    {buy:{c:"The platform watches rivals and ships battlecards",n:[{l:"Competitor sources",t:"src"},{l:"Crayon or Klue",t:"core"},{l:"Battlecards in CRM",t:"sys"}],e:["pages + news","battlecards"]},
+     build:{c:"An agent watches and drafts the update",n:[{l:"Competitor pages",t:"src"},{l:"Build: monitor agent",t:"build"},{l:"Battlecard draft",t:"sys"}],e:["page changes","drafted update"]}},
+    {buy:{c:"Payments and revenue recognition in one flow",n:[{l:"Subscription",t:"sys"},{l:"Stripe",t:"core"},{l:"Rev rec + ledger",t:"sys"}],e:["charges","recognized revenue"]}},
+    {buy:{c:"The platform scores health from signals",n:[{l:"Usage + support",t:"src"},{l:"ChurnZero",t:"core"},{l:"CSM playbook",t:"sys"}],e:["signals","health score"]},
+     build:{c:"Your score reads your product data",n:[{l:"Product usage",t:"src"},{l:"Build: health score",t:"build"},{l:"CS platform + CRM",t:"sys"}],e:["usage events","risk score"]}},
+    {buy:{c:"One model layer powers every workflow",n:[{l:"GTM workflow",t:"src"},{l:"Claude API",t:"core"},{l:"CRM + sequencer",t:"sys"}],e:["prompt + context","structured output"]}}
+  ];
+
+  const grid=document.getElementById('matrixgrid');
+  const detail=document.getElementById('detail');
+  let activeCol=null;
+
+  function counts(si){let c={buy:0,buildon:0,build:0};CATS.forEach(cat=>c[cat.v[si]]++);return c;}
+
+  function build(){
+    grid.innerHTML="";
+    const corner=document.createElement('div');
+    corner.className="corner";corner.innerHTML='<div class="t">Category &darr; / Stage &rarr;</div>';
+    grid.appendChild(corner);
+    STAGES.forEach((st,si)=>{
+      const c=counts(si);
+      const h=document.createElement('div');
+      h.className="hcell";h.setAttribute('role','button');h.dataset.col=si;
+      h.innerHTML=`<span class="stg">${st.stg}</span><span class="rng">${st.rng}</span>
+        <div class="minibar" title="${c.buy} buy, ${c.buildon} buy+build, ${c.build} build">
+          <span class="b1" style="flex:${c.buy}"></span><span class="b2" style="flex:${c.buildon}"></span><span class="b3" style="flex:${c.build}"></span>
+        </div>`;
+      h.addEventListener('click',()=>toggleCol(si));
+      grid.appendChild(h);
+    });
+    CATS.forEach((cat,ci)=>{
+      const lab=document.createElement('div');
+      lab.className="rowlabel";
+      lab.innerHTML=`<span class="nm">${cat.nm}</span><span class="pb">${cat.pb}</span>`;
+      grid.appendChild(lab);
+      cat.v.forEach((verdict,si)=>{
+        const cell=document.createElement('div');
+        cell.className=`cell v-${verdict}`;cell.tabIndex=0;cell.setAttribute('role','button');
+        cell.dataset.col=si;cell.dataset.row=ci;
+        cell.setAttribute('aria-label',`${cat.nm}, ${STAGES[si].stg}: ${VFULL[verdict]}`);
+        cell.innerHTML=`<span class="dot"></span><span class="vl">${VLABEL[verdict]}</span>`;
+        cell.addEventListener('click',()=>select(ci,si));
+        cell.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(ci,si);}});
+        grid.appendChild(cell);
+      });
+    });
+  }
+
+  function toggleCol(si){
+    activeCol=(activeCol===si)?null:si;
+    document.querySelectorAll('.cell').forEach(c=>{
+      c.classList.toggle('coldim', activeCol!==null && (+c.dataset.col)!==activeCol);
+    });
+  }
+
+  function select(ci,si){
+    document.querySelectorAll('.cell').forEach(c=>c.classList.remove('sel'));
+    const cell=grid.querySelector(`.cell[data-row="${ci}"][data-col="${si}"]`);
+    if(cell) cell.classList.add('sel');
+    render(ci,si);
+  }
+
+  function render(ci,si){
+    const cat=CATS[ci], st=STAGES[si], verdict=cat.v[si];
+    const arch=(verdict!=="buy" && ARCH[ci].build) ? ARCH[ci].build : ARCH[ci].buy;
+    const tagFor={src:"Source",sys:"System",core:"Buy",build:"You build"};
+    let _p=[];
+    arch.n.forEach((nd,idx)=>{
+      _p.push(`<div class="anode ${nd.t}"><span class="atag">${tagFor[nd.t]||""}</span><span class="aname">${nd.l.replace(/^Build:\s*/,"")}</span></div>`);
+      if(idx<arch.n.length-1){const lbl=(arch.e&&arch.e[idx])?arch.e[idx]:"";_p.push(`<div class="aconn"><span class="adata">${lbl}</span><span class="aline"></span></div>`);}
+    });
+    const archHTML=_p.join("");
+
+    let stageLine;
+    if(verdict==="buy"){
+      stageLine = cat.reason
+        ? `Still <b>buy</b> here. The build case (${cat.reason}) has not turned on at this stage.`
+        : `<b>Buy</b> at every stage. This category never crosses into build.`;
+    } else if(verdict==="buildon"){
+      stageLine = `<b>Buy and build on</b> at ${st.stg}. Keep the platform, ${cat.reason}.`;
+    } else {
+      stageLine = `<b>Build</b> at ${st.stg}. ${cat.reason.charAt(0).toUpperCase()+cat.reason.slice(1)}, and you now have the data and the engineer to own it.`;
+    }
+
+    let bdHTML="";
+    if(verdict!=="buy" && cat.bd){
+      const b=cat.bd;
+      bdHTML=`<div class="builddetails"><div class="bdh">Build details</div>
+        <div class="bdrow"><span class="bdk">Build</span><span class="bdv">${b.build}</span></div>
+        <div class="bdrow"><span class="bdk">Deploy and host</span><span class="bdv">${b.host}</span></div>
+        <div class="bdrow"><span class="bdk">Maintain</span><span class="bdv">${b.maintain}</span></div>
+        <div class="bdrow"><span class="bdk">Secure</span><span class="bdv">${b.secure}</span></div></div>`;
+    }
+
+    detail.className="detail";
+    detail.innerHTML=`
+      <div class="top">
+        <span class="deye">${cat.nm} &middot; ${st.stg} &middot; ${st.rng}</span>
+        <span class="vbadge v-${verdict}">${VFULL[verdict]}</span>
+      </div>
+      <h3>${cat.nm}</h3>
+      <div class="stagecall v-${verdict}">${stageLine}</div>
+      <div class="grid2">
+        <div><div class="lab">The problem</div><p>${cat.pb}</p>
+          <div class="lab">Buy default</div><p>${cat.buy}</p><p class="cost">${cat.cost}</p></div>
+        <div><div class="lab">Build / vibe-code</div><p>${cat.build}</p></div>
+      </div>
+      ${bdHTML}
+      <div class="lab" style="color:${verdict==='buy'?'var(--buy)':'var(--build)'}">Architecture &middot; ${arch.c}</div>
+      <div class="arch">${archHTML}</div>`;
+  }
+
+  build();
+})();
+</script>
+</body>
+</html>
