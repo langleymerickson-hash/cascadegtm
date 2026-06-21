@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,8 +42,6 @@
 
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 6px}
   .toolbar .sp{flex:1}
-  body:not(.editmode) .toolbar{display:none}
-  body:not(.editmode) .edit-only{display:none!important}
   .btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;cursor:pointer;
     border-radius:9px;padding:10px 15px;border:1px solid var(--line-hi);background:var(--card);color:var(--paper);transition:border-color .15s,background .15s}
   .btn:hover{border-color:var(--teal)}
@@ -140,12 +139,10 @@
   <p class="lede">An AI-assisted content pipeline for a brand. Add a working title and a one-line thesis, and a small LLM workflow shapes the brief: the angle, the audience, the format, and the proof points to anchor it. Ideas move through stages the way revenue moves through a pipeline.</p>
 
   <div class="toolbar">
-    <button class="btn primary edit-only" id="newBtn">+ New idea</button>
-    <button class="btn edit-only" id="publishBtn"><span class="spark">&#8593;</span>Publish snapshot</button>
+    <button class="btn primary" id="newBtn">+ New idea</button>
     <span class="sp"></span>
-    <button class="btn edit-only" id="exportBtn">Export</button>
-    <button class="btn edit-only" id="settingsBtn">Settings</button>
-    <button class="btn edit-only" id="exitEdit">Exit edit mode</button>
+    <button class="btn" id="exportBtn">Export</button>
+    <button class="btn" id="settingsBtn">Settings</button>
   </div>
 
   <div class="flowbar" id="flowbar"></div>
@@ -207,7 +204,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/*SEED_START*/const SEED = [
+const SEED = [
     {id:"w1",num:"002",title:"10 GTM Workflows We Built With Claude (With the Diagrams)",
      aud:["GTM Eng","CRO","Founders"],trending:false,prio:3,status:"researching",
      thesis:"Show, don't tell: ten real agentic workflows, each with an architecture diagram and the 'what runs without a human' framing.",
@@ -358,7 +355,7 @@
        "The stage heuristic: Seed/0–1M — buy everything, glue with Zapier, build nothing. Series A/1–5M — buy the stack, vibe-code the connective tissue (Clay + Claude). Series B/5–20M — the crossover: with a GTM Engineer + proprietary data, build differentiated workflows (scoring, signal routing) on bought systems of record. Series C+/20M+ — buy enterprise platforms, build a governed portfolio of owned agents (ties № 017). Build only turns TCO-competitive with SaaS around the ~$60K/yr spend level.",
        "Per-category map across all 17. Hard-buy / never build: CRM, Billing, Conversation Intelligence, contact data, CPQ, marketing automation, enablement, the foundation LLM itself. Buy-and-build-on: Data Orchestration (Clay is the build substrate), Automation (vibe-code the logic, buy the connectors). Strongest build/vibe-code candidates at B+: data quality/dedup, an ABM signal layer on a Bombora feed, custom attribution models, a competitor-monitoring agent, CS health scoring on product data. Costs to cite: Apollo $49/user, Bombora ~$25K, 6sense $60K+, Make $200–400/mo, HockeyStack $2,200/mo, Dreamdata ~$750/mo, Claude $3/$15 per M.",
        "Security & hidden traps: PII/payments are a hard buy (PCI, ASC 606); custom agents add prompt-injection, data-egress, and secrets surface (~45% of AI-generated code failed a security review in one study). What teams miss — maintenance is the real cost (a vibe-coded agent is a product), bus-factor/talent dependency, vendor-roadmap risk (they may ship it free), data portability, and agent sprawl. Build upside: your data stays in your environment. Two business cases: CFO/CEO (TCO + governance) and CRO/CMO/CCO/Head of Growth (build only where custom fit moves pipeline/NRR)."]}
-  ];/*SEED_END*/
+  ];
 </script>
 <script>
 (function(){
@@ -376,7 +373,7 @@
     setSync(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
   };
 
-  let ideas=[]; let editMode=false;
+  let ideas=[];
   function seedClone(){ return SEED.map(s=>Object.assign({desc:"",notes:"",ai:false}, JSON.parse(JSON.stringify(s)))); }
 
   async function load(){
@@ -426,21 +423,6 @@
   const drawerScrim=document.getElementById("drawerScrim"), drawer=document.getElementById("drawer");
   function openDrawer(id){
     const i=byId(id); if(!i)return;
-    if(!editMode){
-      const proofR=(i.proof||[]).map(p=>`<li>${esc(p)}</li>`).join("");
-      const audsR=(i.aud||[]).map(a=>`<span class="badge">${esc(ALABEL[a]||a)}</span>`).join(" ");
-      drawer.innerHTML=`<button class="x" id="dwClose" style="top:16px;right:16px">&times;</button>
-        <div class="tl" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
-          <span class="num">&#8470; ${esc(i.num||"&mdash;")}</span>${i.trending?'<span class="badge trend">Trending</span>':""}${i.format?`<span class="badge">${esc(i.format)}</span>`:""}</div>
-        <h2 style="font-size:24px;line-height:1.12">${esc(i.title)}</h2>
-        <div class="lab">Thesis</div><p class="body">${esc(i.thesis||"")}</p>
-        ${i.desc?`<div class="lab">Description</div><p class="body">${esc(i.desc)}</p>`:""}
-        ${proofR?`<div class="lab">Proof points</div><ul>${proofR}</ul>`:""}
-        ${audsR?`<div class="lab">Audience</div><div style="display:flex;gap:6px;flex-wrap:wrap">${audsR}</div>`:""}`;
-      drawer.querySelector("#dwClose").onclick=closeDrawer;
-      drawerScrim.classList.add("open");
-      return;
-    }
     const proof=(i.proof||[]).map(p=>`<li>${esc(p)}</li>`).join("");
     const auds=(i.aud||[]).map(a=>`<span class="badge">${esc(ALABEL[a]||a)}</span>`).join(" ");
     const stage=STAGES.map(([k,l])=>`<button class="sb ${(i.status||'backlog')===k?'active':''}" data-st="${k}">${l}</button>`).join("");
@@ -546,18 +528,6 @@ Thesis: ${thesis}`;
     const blob=new Blob([JSON.stringify(ideas,null,2)],{type:"application/json"});
     const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cascadegtm-pipeline.json";a.click();URL.revokeObjectURL(a.href);
   };
-  document.getElementById("publishBtn").onclick=async()=>{
-    let src;
-    try{ src=await (await fetch(location.href,{cache:"no-store"})).text(); }
-    catch(e){ toast("Publish needs your hosted page. Open the GitHub URL and try again."); return; }
-    if(src.indexOf("/*SEED_START*/")<0){ toast("Could not find the snapshot marker."); return; }
-    const baked="/*SEED_START*/const SEED = "+JSON.stringify(ideas)+";/*SEED_END*/";
-    const out=src.replace(/\/\*SEED_START\*\/[\s\S]*?\/\*SEED_END\*\//, ()=>baked);
-    const blob=new Blob([out],{type:"text/html"});
-    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="editorial-pipeline.html";a.click();URL.revokeObjectURL(a.href);
-    toast("Snapshot downloaded. Upload it to GitHub to publish.");
-  };
-  document.getElementById("exitEdit").onclick=()=>{ Store.setSync("cascade-pipeline-editmode","0"); editMode=false; document.body.classList.remove("editmode"); closeDrawer(); render(); toast("View-only mode. Add #edit to the URL to edit again."); };
   const importFile=document.getElementById("importFile");
   document.getElementById("importBtn").onclick=()=>importFile.click();
   importFile.onchange=()=>{ const f=importFile.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ try{ const arr=JSON.parse(r.result); if(Array.isArray(arr)){ideas=arr;save();render();setScrim.classList.remove("open");toast("Pipeline imported");} else toast("That file is not a pipeline export"); }catch(e){toast("Could not read that file");} }; r.readAsText(f); };
@@ -568,12 +538,7 @@ Thesis: ${thesis}`;
   function toast(m){toastEl.textContent=m;toastEl.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove("show"),1800);}
   document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDrawer();compScrim.classList.remove("open");setScrim.classList.remove("open");}});
 
-  function initEditMode(){
-    try{ if(location.hash && /edit/i.test(location.hash)) Store.setSync("cascade-pipeline-editmode","1"); }catch(e){}
-    editMode = Store.getSync("cascade-pipeline-editmode")==="1";
-    document.body.classList.toggle("editmode", editMode);
-  }
-  (async function(){ initEditMode(); await load(); render(); })();
+  (async function(){ await load(); render(); })();
 })();
 </script>
 </body>
