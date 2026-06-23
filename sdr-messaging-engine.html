@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDR Messaging Engine | CascadeGTM</title>
-<meta name="description" content="An LLM-powered tool that builds an AI twin of a buyer persona, drafts a cold email, roasts it from the persona's point of view, and rewrites it into something they'd reply to. A CascadeGTM working tool.">
+<meta name="description" content="An LLM-powered tool: build an AI twin of a buyer, write or paste your cold email, and workshop it against the twin until they would actually reply. A CascadeGTM working tool.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://langleymerickson-hash.github.io/cascadegtm/sdr-messaging-engine.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SDR Messaging Engine | CascadeGTM">
-<meta property="og:description" content="Build an AI twin of a buyer, draft a cold email, roast it from their point of view, and rewrite it into a reply.">
+<meta property="og:description" content="Build an AI twin of a buyer, then workshop your email against their point of view until the twin says yes, they would reply.">
 <meta property="og:site_name" content="CascadeGTM">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,81 +169,78 @@
   .callout p{margin:0;font-size:15px;color:var(--paper)}
 </style>
 <style>
-/* SDR Messaging Engine — tool UI on the CascadeGTM dark theme */
+/* SDR Messaging Engine — workshop-to-yes UI on the CascadeGTM dark theme */
 .tool-wrap{max-width:880px;margin:0 auto;padding:42px 24px 90px}
 .tool-head{position:relative;margin-bottom:10px}
 .tool-head h1{font-family:var(--serif);font-size:clamp(30px,5vw,46px);font-weight:600;line-height:1.04;letter-spacing:-.02em;margin:8px 0 12px}
 .tool-head h1 em{font-style:italic;background:linear-gradient(90deg,var(--buy),var(--buildon));-webkit-background-clip:text;background-clip:text;color:transparent}
-.tool-head .lede{font-size:18px;color:var(--fog);max-width:680px;margin:0}
+.tool-head .lede{font-size:18px;color:var(--fog);max-width:700px;margin:0}
 .gear{position:absolute;top:2px;right:0;display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line-hi);color:var(--fog);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:9px;padding:8px 12px;cursor:pointer}
 .gear:hover{color:var(--paper);border-color:var(--fog-2)}
 .gear svg{width:14px;height:14px}
-
 .panel{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
 .panel.hidden{display:none}
-.panel .ptitle{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--buy);margin:0 0 16px}
+.panel .ptitle{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--buy);margin:0 0 8px}
 .panel .ptitle .num{color:var(--fog-2)}
-.field{margin-bottom:15px}
-.field:last-child{margin-bottom:0}
+.subhelp{font-size:13px;color:var(--fog-2);line-height:1.55;margin:0 0 16px}
+.field{margin-bottom:15px}.field:last-child{margin-bottom:0}
 .field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fog-2);margin-bottom:8px}
 .field input,.field textarea{width:100%;background:var(--card);border:1px solid var(--line-hi);border-radius:9px;padding:11px 13px;color:var(--paper);font-family:var(--sans);font-size:14px;line-height:1.5}
 .field textarea{min-height:70px;resize:vertical}
 .field textarea.voc{min-height:120px}
+.field textarea.email{min-height:150px;font-size:14.5px}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--buy)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:560px){.two{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:560px){.two{grid-template-columns:1fr}}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
 .chip{font-family:var(--sans);font-size:12px;font-weight:500;border:1px solid var(--line-hi);background:transparent;color:var(--fog);border-radius:30px;padding:5px 12px;cursor:pointer;transition:all .12s}
 .chip:hover{color:var(--paper)}
 .chip.active{background:rgba(57,211,198,.14);border-color:var(--buy);color:var(--buy)}
-
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
 .btn{font-family:var(--sans);font-size:13.5px;font-weight:600;border-radius:10px;padding:11px 18px;cursor:pointer;border:1px solid var(--line-hi);background:transparent;color:var(--paper);transition:all .15s}
 .btn.primary{background:var(--buy);border-color:var(--buy);color:#07241f}
 .btn.primary:hover{filter:brightness(1.08)}
-.btn.ghost{color:var(--fog)}
-.btn.ghost:hover{color:var(--paper);border-color:var(--fog-2)}
-.byo-note{font-size:12.5px;color:var(--fog-2);line-height:1.6;margin:14px 0 0}
-.byo-note b{color:var(--fog)}
+.btn.ghost{color:var(--fog)}.btn.ghost:hover{color:var(--paper);border-color:var(--fog-2)}
+.btn.sm{padding:7px 13px;font-size:12px}
+.byo-note{font-size:12.5px;color:var(--fog-2);line-height:1.6;margin:14px 0 0}.byo-note b{color:var(--fog)}
 .linklike{background:none;border:none;color:var(--buy);font:inherit;cursor:pointer;padding:0;border-bottom:1px solid rgba(57,211,198,.4)}
-
 .twins{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 0}
 .twin-chip{font-family:var(--sans);font-size:12.5px;font-weight:600;border:1px solid var(--line-hi);background:var(--card);color:var(--fog);border-radius:9px;padding:7px 13px;cursor:pointer}
 .twin-chip.active{border-color:var(--buy);color:var(--buy);background:var(--card-hi)}
 .twin-card{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
 .twin-card .tc-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--buildon);margin-bottom:10px}
 .twin-profile{white-space:pre-wrap;font-size:13.5px;line-height:1.65;color:var(--paper);font-family:var(--sans)}
-
+.round{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fog-2);margin-bottom:7px}
+.verdict{background:var(--card);border:1px solid var(--line-hi);border-radius:12px;padding:14px 16px;margin-bottom:14px;color:var(--fog);font-size:14px;line-height:1.6}
+.verdict b{color:var(--paper)}
+.approve{background:rgba(53,192,138,.1);border:1px solid rgba(53,192,138,.5);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.approve .big{font-family:var(--serif);font-size:21px;font-weight:600;color:#43d199;display:flex;align-items:center;gap:11px;line-height:1.2}
+.approve .big svg{width:26px;height:26px;flex:none}
+.approve .why{color:var(--paper);font-size:14.5px;line-height:1.6;margin-top:10px}
 .drf{border-radius:12px;border:1px solid var(--line);background:var(--card);padding:16px 18px;margin:14px 0;position:relative}
 .drf .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px;display:block}
-.drf.draft .lbl{color:var(--fog-2)}
 .drf.roast{background:rgba(246,169,59,.06);border-color:rgba(246,169,59,.3)}
 .drf.roast .lbl{color:var(--build)}
 .drf.final{border-color:var(--buy);background:var(--card-hi)}
 .drf.final .lbl{color:var(--buy)}
 .drf .body{white-space:pre-wrap;font-size:14.5px;line-height:1.7;color:var(--paper);font-family:var(--sans)}
 .drf .copy{position:absolute;top:13px;right:13px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fog);background:var(--ink-2);border:1px solid var(--line-hi);border-radius:7px;padding:4px 9px;cursor:pointer}
-.drf .copy:hover{color:var(--paper)}
-.drf .copy.done{color:var(--buy);border-color:var(--buy)}
-.sample-badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--build);border:1px solid rgba(246,169,59,.4);background:rgba(246,169,59,.1);border-radius:20px;padding:3px 9px;margin-bottom:6px}
-
+.drf .copy:hover{color:var(--paper)}.drf .copy.done{color:var(--buy);border-color:var(--buy)}
+.pageacts{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.sample-badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--build);border:1px solid rgba(246,169,59,.4);background:rgba(246,169,59,.1);border-radius:20px;padding:3px 9px;margin-bottom:10px}
 .loading{display:flex;align-items:center;gap:11px;color:var(--fog);font-size:14px;padding:6px 0}
 .dot-pulse{width:9px;height:9px;border-radius:50%;background:var(--buy);animation:pulse 1s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
 .err{color:#f4a08a;font-size:13.5px;line-height:1.6;background:rgba(244,160,138,.08);border:1px solid rgba(244,160,138,.25);border-radius:10px;padding:13px 15px}
-.info{color:var(--fog);font-size:13.5px;line-height:1.6;background:rgba(57,211,198,.07);border:1px solid var(--line-hi);border-radius:10px;padding:13px 15px}
-.info b{color:var(--paper)}
+.info{color:var(--fog);font-size:13.5px;line-height:1.6;background:rgba(57,211,198,.07);border:1px solid var(--line-hi);border-radius:10px;padding:13px 15px}.info b{color:var(--paper)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
+.confetti i{position:absolute;top:-18px;width:8px;height:13px;border-radius:2px;opacity:.95;animation:cfall linear forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(620deg);opacity:.65}}
 .tool-foot{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--fog-2)}
-
-.modal-scrim{position:fixed;inset:0;background:rgba(5,9,15,.66);z-index:90;display:none}
-.modal-scrim.show{display:block}
-.modal{position:fixed;z-index:91;top:50%;left:50%;transform:translate(-50%,-50%);width:min(440px,92vw);background:var(--ink-2);border:1px solid var(--line-hi);border-radius:16px;padding:26px;display:none}
-.modal.show{display:block}
-.modal h3{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px}
-.modal .msub{color:var(--fog);font-size:13px;margin:0 0 18px}
+.modal-scrim{position:fixed;inset:0;background:rgba(5,9,15,.66);z-index:90;display:none}.modal-scrim.show{display:block}
+.modal{position:fixed;z-index:91;top:50%;left:50%;transform:translate(-50%,-50%);width:min(440px,92vw);background:var(--ink-2);border:1px solid var(--line-hi);border-radius:16px;padding:26px;display:none}.modal.show{display:block}
+.modal h3{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px}.modal .msub{color:var(--fog);font-size:13px;margin:0 0 18px}
 .modal label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fog-2);margin-bottom:8px}
-.modal input{width:100%;background:var(--card);border:1px solid var(--line-hi);border-radius:9px;padding:11px 13px;color:var(--paper);font-family:var(--mono);font-size:13px}
-.modal input:focus{outline:none;border-color:var(--buy)}
+.modal input{width:100%;background:var(--card);border:1px solid var(--line-hi);border-radius:9px;padding:11px 13px;color:var(--paper);font-family:var(--mono);font-size:13px}.modal input:focus{outline:none;border-color:var(--buy)}
 .modal .note{font-size:12px;color:var(--fog-2);line-height:1.55;margin:12px 0 0}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
 </style>
@@ -270,7 +267,7 @@
     <button class="gear" id="openSettings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.6 7.6 0 000-2l1.8-1.4-2-3.4-2.1.9a7.6 7.6 0 00-1.7-1L15 3H9l-.4 2.1a7.6 7.6 0 00-1.7 1l-2.1-.9-2 3.4L4.6 11a7.6 7.6 0 000 2l-1.8 1.4 2 3.4 2.1-.9a7.6 7.6 0 001.7 1L9 21h6l.4-2.1a7.6 7.6 0 001.7-1l2.1.9 2-3.4z"/></svg> Settings</button>
     <div class="eyebrow">CascadeGTM Tools &middot; LLM-powered</div>
     <h1>SDR Messaging <em>Engine</em></h1>
-    <p class="lede">Build an AI twin of a buyer persona from your own call notes and emails, draft a cold email to them, then let the twin roast the draft and your positioning &mdash; and rewrite it into something they'd actually reply to. Bring your own Anthropic API key.</p>
+    <p class="lede">Build an AI twin of a buyer persona, then write or paste your own cold email and run it by the twin. They roast it from their point of view and you refine together until the twin says yes, they would reply. When the twin says yes, the message is ready to send. Bring your own Anthropic API key.</p>
   </header>
 
   <section class="panel">
@@ -283,8 +280,9 @@
 
   <section class="panel">
     <p class="ptitle"><span class="num">1 &middot;</span> Build a buyer twin</p>
+    <p class="subhelp">Pick the role you are selling to. Paste real call notes or emails to sharpen the twin, or build it from the role alone.</p>
     <div class="field">
-      <label>Persona / title</label>
+      <label>Persona / role</label>
       <input id="ptitle" value="RevOps Leader" autocomplete="off">
       <div class="chips" id="presets">
         <button class="chip" data-seg="GTM Engineer">GTM Engineer</button>
@@ -296,24 +294,24 @@
       </div>
     </div>
     <div class="field">
-      <label>Voice of customer &mdash; paste call notes / transcripts &amp; example emails (optional)</label>
-      <textarea id="voc" class="voc" placeholder="Paste discovery-call notes, transcript snippets, and real emails from this kind of buyer. The more you give it, the sharper the twin. Leave blank to build from the title + industry research."></textarea>
+      <label>Voice of customer &mdash; paste call notes / transcripts &amp; emails (optional)</label>
+      <textarea id="voc" class="voc" placeholder="Paste discovery-call notes, transcript snippets, and real emails from this kind of buyer. The more you give it, the sharper the twin."></textarea>
     </div>
     <div class="actions">
       <button class="btn primary" id="buildTwin">Build the twin</button>
       <button class="btn ghost" id="sampleBtn">See a sample</button>
     </div>
-    <p class="byo-note">The twin, the draft, the roast and the rewrite all run on <b>your own</b> Anthropic API key (add it in Settings) &mdash; billed to your account, never anyone else's. New here? <button class="linklike" id="sampleInline">See a sample</button> first &mdash; no key needed.</p>
+    <p class="byo-note">The twin and every round of feedback run on <b>your own</b> Anthropic API key (add it in Settings) &mdash; billed to your account, never anyone else's. New here? <button class="linklike" id="sampleInline">See a sample</button> first &mdash; no key needed.</p>
     <div id="twinMsg"></div>
     <div class="twins" id="twins"></div>
     <div id="twinCard"></div>
   </section>
 
   <section class="panel hidden" id="draftSection">
-    <p class="ptitle"><span class="num">2 &middot;</span> Draft &amp; roast <span id="forTwin" style="color:var(--fog);text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:12px"></span></p>
-    <div class="field"><label>Call to action to land</label><textarea id="cta" placeholder="e.g. Take a look at my free Data Quality playbook &mdash; a contact database that corrects itself."></textarea></div>
-    <div class="field"><label>Link for the CTA</label><input id="link" placeholder="https://..." autocomplete="off"></div>
-    <div class="actions"><button class="btn primary" id="generate">Draft &amp; roast</button></div>
+    <p class="ptitle"><span class="num">2 &middot;</span> Draft, roast, and earn the yes <span id="forTwin" style="color:var(--fog);text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:12px"></span></p>
+    <p class="subhelp">Write your own email or paste an existing template, then run it by the twin. Copy their improved version back into your draft, make it yours, and keep going until the twin would actually reply.</p>
+    <div class="field"><label>Your email to this buyer</label><textarea id="userDraft" class="email" placeholder="Write or paste your cold email here, including the action you want them to take."></textarea></div>
+    <div class="actions"><button class="btn primary" id="runTwin">Run it by the twin</button></div>
     <div id="output"></div>
   </section>
 
@@ -337,187 +335,169 @@
 
 <script>
 (function(){
-  var memStore = {};
-  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return memStore[k]||null; } }
-  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ memStore[k]=v; } }
+  var memStore={};
+  function lsGet(k){ try{return localStorage.getItem(k);}catch(e){return memStore[k]||null;} }
+  function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){memStore[k]=v;} }
   function $(id){ return document.getElementById(id); }
-  function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
-  function loadingHTML(msg){ return '<div class="loading"><span class="dot-pulse"></span>'+esc(msg)+'</div>'; }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+  function loadingHTML(m){ return '<div class="loading"><span class="dot-pulse"></span>'+esc(m)+'</div>'; }
+  var CHECK='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#43d199\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"rgba(67,209,153,.5)\" stroke-width=\"1.6\"/><path d=\"M8 12.5l2.5 2.5L16 9\"/></svg>';
+  var state={ mode:'idle', twins:[], active:-1, round:0 };
 
-  var state = { mode:'idle', twins:[], active:-1 };
-
-  // settings
-  function openSettings(){ $('apiKey').value = lsGet('csg_key')||''; $('scrim').classList.add('show'); $('settings').classList.add('show'); }
+  function openSettings(){ $('apiKey').value=lsGet('csg_key')||''; $('scrim').classList.add('show'); $('settings').classList.add('show'); }
   function closeSettings(){ $('scrim').classList.remove('show'); $('settings').classList.remove('show'); }
-  $('openSettings').onclick = openSettings;
-  $('closeSettings').onclick = closeSettings;
-  $('scrim').onclick = closeSettings;
-  $('saveKey').onclick = function(){ lsSet('csg_key', $('apiKey').value.trim()); closeSettings(); };
+  $('openSettings').onclick=openSettings; $('closeSettings').onclick=closeSettings; $('scrim').onclick=closeSettings;
+  $('saveKey').onclick=function(){ lsSet('csg_key',$('apiKey').value.trim()); closeSettings(); };
 
-  // restore prefs
-  if(lsGet('csg_sdr_company')) $('company').value = lsGet('csg_sdr_company');
-  if(lsGet('csg_sdr_site')) $('website').value = lsGet('csg_sdr_site');
-  $('company').addEventListener('input', function(){ lsSet('csg_sdr_company', this.value); });
-  $('website').addEventListener('input', function(){ lsSet('csg_sdr_site', this.value); });
+  ['company','website'].forEach(function(id){ var k='csg_sdr_'+id; if(lsGet(k)) $(id).value=lsGet(k); $(id).addEventListener('input',function(){ lsSet(k,this.value); }); });
+  if(lsGet('csg_sdr_draft')) $('userDraft').value=lsGet('csg_sdr_draft');
+  $('userDraft').addEventListener('input',function(){ lsSet('csg_sdr_draft', this.value); });
 
   $('presets').addEventListener('click', function(e){
-    var b = e.target.closest('[data-seg]'); if(!b) return;
-    $('ptitle').value = b.dataset.seg;
+    var b=e.target.closest('[data-seg]'); if(!b) return;
+    $('ptitle').value=b.dataset.seg;
     [].forEach.call(this.querySelectorAll('.chip'), function(c){ c.classList.toggle('active', c===b); });
   });
 
-  // API
-  function callClaude(messages, opts){
-    opts = opts || {};
-    var body = { model:"claude-sonnet-4-6", max_tokens: opts.max_tokens||1500, messages: messages };
-    if(opts.tools) body.tools = opts.tools;
-    return fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST",
-      headers:{ "content-type":"application/json", "x-api-key":lsGet('csg_key'), "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
-      body: JSON.stringify(body)
-    }).then(function(res){
-      if(!res.ok){ return res.text().then(function(t){ throw new Error("Anthropic API "+res.status+" - "+t.slice(0,300)); }); }
-      return res.json();
-    }).then(function(data){
-      return (data.content||[]).filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("\n").trim();
-    });
+  function callClaude(messages,opts){
+    opts=opts||{};
+    var body={ model:"claude-sonnet-4-6", max_tokens:opts.max_tokens||1500, messages:messages };
+    if(opts.tools) body.tools=opts.tools;
+    return fetch("https://api.anthropic.com/v1/messages",{ method:"POST",
+      headers:{ "content-type":"application/json","x-api-key":lsGet('csg_key'),"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true" },
+      body:JSON.stringify(body) })
+      .then(function(r){ if(!r.ok){ return r.text().then(function(t){ throw new Error("Anthropic API "+r.status+" - "+t.slice(0,300)); }); } return r.json(); })
+      .then(function(d){ return (d.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join("\n").trim(); });
   }
-  function needKey(targetEl){
-    targetEl.innerHTML = '<div class="info"><b>Add your own Anthropic API key to run live.</b><br>Everything here runs on the key you enter in Settings, billed to <b>your own</b> account. Get one at console.anthropic.com, or click <b>See a sample</b> to explore with example data \u2014 no key needed.</div>';
-    openSettings();
-  }
+  function needKey(el){ el.innerHTML='<div class="info"><b>Add your own Anthropic API key to run live.</b><br>Everything runs on the key you enter in Settings, billed to <b>your own</b> account. Get one at console.anthropic.com, or click <b>See a sample</b> \u2014 no key needed.</div>'; openSettings(); }
+  function extractObj(t){ var a=t.indexOf('{'), b=t.lastIndexOf('}'); return (a>=0&&b>a)?t.slice(a,b+1):t; }
 
-  // build twin
-  $('buildTwin').onclick = function(){
-    var title = ($('ptitle').value||'').trim();
-    if(!title){ $('twinMsg').innerHTML = '<div class="err">Add a persona title first.</div>'; return; }
+  // ---- Step 1: build twin ----
+  $('buildTwin').onclick=function(){
+    var title=($('ptitle').value||'').trim();
+    if(!title){ $('twinMsg').innerHTML='<div class="err">Add a persona role first.</div>'; return; }
     if(!lsGet('csg_key')){ needKey($('twinMsg')); return; }
-    if(state.twins.length >= 3 && state.mode!=='sample'){ $('twinMsg').innerHTML = '<div class="info">You\u2019ve built 3 twins (your top personas). Click one below to use it, or refresh to start over.</div>'; return; }
+    if(state.twins.length>=3 && state.mode!=='sample'){ $('twinMsg').innerHTML='<div class="info">You\u2019ve built 3 twins. Click one below to use it.</div>'; return; }
     state.mode='live';
-    var voc = ($('voc').value||'').trim();
-    $('twinMsg').innerHTML = loadingHTML('Building the '+title+' twin from your inputs and industry research\u2026');
-    var prompt = 'You are building an "AI twin" of a B2B buyer persona for sales messaging. Use the web where helpful, plus any voice-of-customer notes provided.\n\n'
-      + 'Persona title: ' + title + '\n'
-      + 'Voice-of-customer material (call notes, emails) \u2014 may be empty:\n' + (voc || '(none provided)') + '\n\n'
-      + 'Return a tight persona twin profile in these labeled sections, plain text:\n'
-      + 'PRIORITIES \u2014 the 3 things this persona is measured on or cares about most.\n'
-      + 'PAINS \u2014 the 2-3 problems that keep them up at night.\n'
-      + 'OBJECTIONS \u2014 the 2-3 reasons they ignore or reject cold outreach.\n'
-      + 'VOICE \u2014 how they talk: words they use, tone, what reads as credible vs. salesy to them.\n'
-      + 'REPLY TRIGGERS \u2014 what actually makes this persona reply to an email.\n\n'
-      + 'Be specific to this role and grounded in the material. No preamble, no closing remarks.';
+    var voc=($('voc').value||'').trim();
+    $('twinMsg').innerHTML=loadingHTML('Building the '+title+' twin from your inputs and industry research\u2026');
+    var prompt='You are building an "AI twin" of a B2B buyer persona for sales messaging. Use the web where helpful, plus any voice-of-customer notes provided.\n\n'
+      +'Persona role: '+title+'\nVoice-of-customer material (may be empty):\n'+(voc||'(none provided)')+'\n\n'
+      +'Return a tight persona twin profile in these labeled sections, plain text:\n'
+      +'PRIORITIES \u2014 the 3 things this persona is measured on or cares about most.\n'
+      +'PAINS \u2014 the 2-3 problems that keep them up at night.\n'
+      +'OBJECTIONS \u2014 the 2-3 reasons they ignore or reject cold outreach.\n'
+      +'VOICE \u2014 how they talk and what reads as credible vs. salesy to them.\n'
+      +'REPLY TRIGGERS \u2014 what actually makes this persona reply to an email.\n\n'
+      +'Be specific to this role and grounded in the material. No preamble.';
     callClaude([{role:"user",content:prompt}], { tools:[{type:"web_search_20250305",name:"web_search"}], max_tokens:1600 })
-      .then(function(text){ addTwin(title, text); $('twinMsg').innerHTML=''; $('voc').value=''; })
-      .catch(function(e){ $('twinMsg').innerHTML = '<div class="err">'+esc(e.message)+'</div>'; });
+      .then(function(text){ addTwin(title,text); $('twinMsg').innerHTML=''; $('voc').value=''; })
+      .catch(function(e){ $('twinMsg').innerHTML='<div class="err">'+esc(e.message)+'</div>'; });
   };
-
-  function addTwin(title, profile){
-    state.twins.push({ title:title, profile:profile });
-    state.active = state.twins.length - 1;
-    renderTwins();
-  }
+  function addTwin(title,profile){ state.twins.push({title:title,profile:profile}); state.active=state.twins.length-1; resetWorkshop(); renderTwins(); }
+  function resetWorkshop(){ state.round=0; var o=$('output'); if(o) o.innerHTML=''; }
   function renderTwins(){
-    $('twins').innerHTML = state.twins.map(function(t,i){
-      return '<button class="twin-chip'+(i===state.active?' active':'')+'" data-i="'+i+'">'+esc(t.title)+'</button>';
-    }).join('');
-    [].forEach.call($('twins').querySelectorAll('.twin-chip'), function(b){
-      b.onclick = function(){ state.active = Number(b.dataset.i); renderTwins(); };
-    });
-    if(state.active > -1){
-      var t = state.twins[state.active];
-      $('twinCard').innerHTML = '<div class="twin-card"><div class="tc-head">AI twin \u00b7 '+esc(t.title)+'</div><div class="twin-profile">'+esc(t.profile)+'</div></div>';
-      $('draftSection').classList.remove('hidden');
-      $('forTwin').textContent = '\u2192 ' + t.title;
-    } else {
-      $('twinCard').innerHTML=''; $('draftSection').classList.add('hidden');
-    }
+    $('twins').innerHTML=state.twins.map(function(t,i){ return '<button class="twin-chip'+(i===state.active?' active':'')+'" data-i="'+i+'">'+esc(t.title)+'</button>'; }).join('');
+    [].forEach.call($('twins').querySelectorAll('.twin-chip'), function(b){ b.onclick=function(){ if(state.active!==Number(b.dataset.i)){ state.active=Number(b.dataset.i); resetWorkshop(); } renderTwins(); }; });
+    if(state.active>-1){
+      var t=state.twins[state.active];
+      $('twinCard').innerHTML='<div class="twin-card"><div class="tc-head">AI twin \u00b7 '+esc(t.title)+'</div><div class="twin-profile">'+esc(t.profile)+'</div></div>';
+      $('draftSection').classList.remove('hidden'); $('forTwin').textContent='\u2192 '+t.title;
+    } else { $('twinCard').innerHTML=''; $('draftSection').classList.add('hidden'); }
   }
 
-  // draft & roast
-  $('generate').onclick = function(){
-    if(state.active < 0){ return; }
-    if(state.mode==='sample'){ renderOutput(SAMPLE_OUT, true); return; }
+  // ---- Step 2: workshop loop ----
+  $('runTwin').onclick=function(){
+    if(state.active<0) return;
+    var draft=($('userDraft').value||'').trim();
+    if(!draft){ $('output').innerHTML='<div class="err">Write or paste your email first.</div>'; return; }
+    if(state.mode==='sample'){ sampleRun(draft); return; }
     if(!lsGet('csg_key')){ needKey($('output')); return; }
-    var t = state.twins[state.active];
-    var company = ($('company').value||'').trim(), site = ($('website').value||'').trim();
-    var cta = ($('cta').value||'').trim(), link = ($('link').value||'').trim();
-    $('output').innerHTML = loadingHTML('Drafting, roasting, and rewriting for the '+t.title+' twin\u2026');
-    var prompt = 'You are an expert SDR and an honest critic. Write a cold email to the persona below, then roast it from that persona\u2019s point of view, then rewrite it.\n\n'
-      + 'THE PERSONA TWIN:\n' + t.profile + '\n\n'
-      + 'WHAT WE SELL \u2014 research the website if useful:\n'
-      + 'Company: ' + (company||'(not given)') + '\n'
-      + 'Website: ' + (site||'(not given)') + '\n\n'
-      + 'Call to action to land: ' + (cta||'(none \u2014 end with a soft ask)') + '\n'
-      + 'Link: ' + (link||'(none)') + '\n\n'
-      + 'Return THREE labeled sections, plain text, each header on its own line:\n\n'
-      + 'DRAFT\nA first-attempt cold email to this persona. Subject line, then body. Short and specific.\n\n'
-      + 'ROAST\nSpeaking AS this persona, brutally honest: why I\u2019d ignore or delete this draft, what reads as generic or salesy, and what is unclear or unconvincing on your website/positioning for someone like me. 3-6 sharp bullets.\n\n'
-      + 'FINAL\nThe rewritten email that earns a reply: addresses the roast, leads with my priority not your product, lands the CTA naturally. Subject line, then body. This is the one to send.\n\n'
-      + 'Be direct and specific. No hype. Never the "it\u2019s not X, it\u2019s Y" construction.';
-    callClaude([{role:"user",content:prompt}], { tools:[{type:"web_search_20250305",name:"web_search"}], max_tokens:2200 })
-      .then(function(text){ renderOutput(parseDRF(text), false); })
-      .catch(function(e){ $('output').innerHTML = '<div class="err">'+esc(e.message)+'</div>'; });
+    var t=state.twins[state.active], company=($('company').value||'').trim(), site=($('website').value||'').trim();
+    state.round=(state.round||0)+1;
+    $('output').innerHTML=loadingHTML('Running it by the '+t.title+' twin\u2026');
+    var prompt='You ARE the following B2B buyer persona. A salesperson sent you the cold email below. Judge it honestly, exactly the way this person would.\n\n'
+      +'THE PERSONA (this is you):\n'+t.profile+'\n\n'
+      +'WHO SENT IT \u2014 Company: '+(company||'(not given)')+' \u2014 Website: '+(site||'(not given)')+'\n\n'
+      +'THE EMAIL THEY SENT YOU:\n'+draft+'\n\n'
+      +'Would YOU, as this persona, actually reply or take the action this email asks for? Be a tough but fair critic. Most cold emails do not earn a reply; only approve if this genuinely would.\n\n'
+      +'Return ONE JSON object only, no prose, no code fences:\n'
+      +'{"approved": true or false, "verdict": "one or two sentences: would you respond, and the single biggest reason", "roast": "if not approved: 3 to 6 short, specific, brutally honest bullets on why you would ignore or delete this and what is weak; if approved: one or two lines on why it works", "improved": "if not approved: a rewritten version that would earn your reply, leading with your priority and keeping the ask, subject line then body; if approved: an empty string"}\n\n'
+      +'No hype. Never the "it is not X, it is Y" construction.';
+    callClaude([{role:"user",content:prompt}], { max_tokens:1700 })
+      .then(function(text){ var d=JSON.parse(extractObj(text)); d.approved=(d.approved===true||String(d.approved).toLowerCase()==='true'); renderRound(d,draft,false); })
+      .catch(function(e){ $('output').innerHTML='<div class="err">Could not reach the twin: '+esc(e.message)+'</div>'; });
   };
 
-  function parseDRF(text){
-    var buckets={DRAFT:[],ROAST:[],FINAL:[]}, cur=null;
-    text.split('\n').forEach(function(line){
-      var t=line.trim().replace(/[:#*_`]/g,'').trim().toUpperCase();
-      if(t==='DRAFT'||t==='ROAST'||t==='FINAL'){ cur=t; return; }
-      if(cur) buckets[cur].push(line);
-    });
-    return { DRAFT:buckets.DRAFT.join('\n').trim(), ROAST:buckets.ROAST.join('\n').trim(), FINAL:buckets.FINAL.join('\n').trim(), raw:text };
-  }
-
-  function block(cls, label, body, withCopy, isSample){
-    var copy = withCopy ? '<button class="copy">Copy</button>' : '';
-    var badge = isSample ? '<span class="sample-badge">Sample output</span><br>' : '';
-    return '<div class="drf '+cls+'">'+copy+'<span class="lbl">'+badge+label+'</span><div class="body">'+esc(body)+'</div></div>';
-  }
-  function renderOutput(o, isSample){
-    var html='';
-    if(o.DRAFT || o.ROAST || o.FINAL){
-      if(o.DRAFT) html += block('draft','First draft', o.DRAFT, true, isSample);
-      if(o.ROAST) html += block('roast','The roast \u2014 from the twin\u2019s point of view', o.ROAST, false, false);
-      if(o.FINAL) html += block('final','Send this one', o.FINAL, true, false);
+  function renderRound(d, draft, isSample){
+    var badge=isSample?'<span class="sample-badge">Sample</span>':'';
+    if(d.approved){
+      $('output').innerHTML=badge
+        +'<div class="approve"><div class="big">'+CHECK+'<span>The '+esc(state.twins[state.active].title)+' twin would reply.</span></div>'
+        +(d.verdict?'<div class="why">'+esc(d.verdict)+'</div>':'')+'</div>'
+        +'<div class="drf final"><button class="copy">Copy</button><span class="lbl">Your approved email</span><div class="body">'+esc(draft)+'</div></div>'
+        +'<p class="subhelp">That is the signal. When the twin says yes, you can be confident the messaging will convert. Send it.</p>';
+      wireCopies(); celebrate();
     } else {
-      html = block('final','Output', o.raw||'', true, isSample);
+      var html=badge+'<div class="round">Round '+(state.round||1)+'</div>'
+        +'<div class="verdict"><b>Not yet.</b> '+esc(d.verdict||'')+'</div>';
+      if(d.roast) html+='<div class="drf roast"><span class="lbl">The roast \u2014 from the twin\u2019s point of view</span><div class="body">'+esc(d.roast)+'</div></div>';
+      if(d.improved) html+='<div class="drf final"><button class="copy">Copy</button><span class="lbl">A version that would earn the yes</span><div class="body">'+esc(d.improved)+'</div><div class="pageacts"><button class="btn primary sm" id="useImproved">Copy to draft and refine</button></div></div>';
+      html+='<p class="subhelp">Make it yours in the draft above, then run it by the twin again. Keep going until they say yes.</p>';
+      $('output').innerHTML=html;
+      wireCopies();
+      var ui=$('useImproved'); if(ui) ui.onclick=function(){ copyToDraft(d.improved||''); };
     }
-    $('output').innerHTML = html;
-    [].forEach.call($('output').querySelectorAll('.drf .copy'), function(btn){
-      btn.onclick = function(){
-        var body = btn.parentElement.querySelector('.body').innerText;
-        function done(){ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(function(){btn.textContent='Copy'; btn.classList.remove('done');},1500); }
-        if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(body).then(done).catch(fb); } else { fb(); }
-        function fb(){ var ta=document.createElement('textarea'); ta.value=body; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(ta); }
-      };
-    });
   }
 
-  // sample
+  function wireCopies(){
+    [].forEach.call($('output').querySelectorAll('.drf .copy'), function(btn){
+      btn.onclick=function(){ copyText(btn.parentElement.querySelector('.body').innerText, btn); };
+    });
+  }
+  function copyText(text,btn){
+    function done(){ var o=btn.textContent; btn.textContent='Copied'; btn.classList.add('done'); setTimeout(function(){btn.textContent=o; btn.classList.remove('done');},1500); }
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(done).catch(fb); } else { fb(); }
+    function fb(){ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(ta); }
+  }
+  function copyToDraft(text){ $('userDraft').value=text; lsSet('csg_sdr_draft',text); $('userDraft').scrollIntoView({behavior:'smooth',block:'center'}); $('userDraft').focus(); }
+
+  function celebrate(){
+    var colors=['#39d3c6','#5098f2','#f6a93b','#d6228f','#43d199'];
+    var c=document.createElement('div'); c.className='confetti';
+    for(var i=0;i<64;i++){ var p=document.createElement('i'); p.style.left=(Math.random()*100)+'%'; p.style.background=colors[i%colors.length]; p.style.animationDelay=(Math.random()*0.35)+'s'; p.style.animationDuration=(1.7+Math.random()*1.3)+'s'; if(Math.random()<0.5) p.style.borderRadius='50%'; c.appendChild(p); }
+    document.body.appendChild(c); setTimeout(function(){ c.remove(); }, 3400);
+  }
+
+  // ---- sample ----
   function runSample(){
     state.mode='sample';
-    state.twins = [{ title:'RevOps Leader', profile:SAMPLE_TWIN }];
-    state.active = 0;
+    state.twins=[{title:'RevOps Leader', profile:SAMPLE_TWIN}]; state.active=0; state.round=0;
     $('ptitle').value='RevOps Leader';
     [].forEach.call($('presets').querySelectorAll('.chip'), function(c){ c.classList.toggle('active', c.dataset.seg==='RevOps Leader'); });
     renderTwins();
-    $('cta').value = 'Take a look at my free Data Quality playbook \u2014 a contact database that corrects itself.';
-    $('link').value = 'https://langleymerickson-hash.github.io/cascadegtm/data-quality-playbook.html';
-    renderOutput(SAMPLE_OUT, true);
-    $('draftSection').scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(!$('company').value) $('company').value='CascadeGTM';
+    if(!$('website').value) $('website').value='https://www.cascadegtm.co';
+    $('userDraft').value=SAMPLE_DRAFT;
+    sampleRun(SAMPLE_DRAFT);
+    $('draftSection').scrollIntoView({behavior:'smooth',block:'start'});
   }
-  $('sampleBtn').onclick = runSample;
-  var _si = document.getElementById('sampleInline'); if(_si) _si.onclick = runSample;
+  function sampleRun(draft){
+    state.round=(state.round||0)+1;
+    if(state.round>=2) renderRound(SAMPLE_APPROVE, draft, true);
+    else renderRound(SAMPLE_ROUND1, draft, true);
+  }
+  $('sampleBtn').onclick=runSample;
+  var _si=document.getElementById('sampleInline'); if(_si) _si.onclick=runSample;
 
-  var SAMPLE_TWIN = 'PRIORITIES\n- A forecast the CRO actually trusts, built on data that is not a mess.\n- Consolidating an overlapping tool stack they get blamed for the cost of.\n- Making reps faster without adding headcount.\n\nPAINS\n- CRM data nobody believes, so every number gets re-litigated.\n- Being asked for attribution they cannot defend.\n- Manual ops work that does not scale with the team.\n\nOBJECTIONS\n- "Another vendor." No time to evaluate one more tool.\n- Burned before by tools that promised automation and added work.\n- Allergic to AI hype with no substance.\n\nVOICE\n- Pragmatic, dry, says "show me." Respects specifics and numbers.\n- Deletes "transform", "synergy", "cutting-edge", "10x" on sight.\n\nREPLY TRIGGERS\n- A specific, true insight about their stack or problem.\n- Proof over pitch; a peer who solved the same thing.\n- Brevity, and no calendar link in the first touch.';
-
-  var SAMPLE_OUT = {
-    DRAFT: 'Subject: Transform your RevOps with AI\n\nHi [Name], hope this finds you well! I\u2019m reaching out because CascadeGTM helps revenue teams transform their go-to-market with cutting-edge AI. We\u2019d love to show you how we can 10x your pipeline. Do you have 15 minutes this week for a quick call?',
-    ROAST: '- "Transform... with cutting-edge AI" is the exact hype I delete on sight. It says nothing.\n- "Hope this finds you well" + "10x your pipeline" reads as a template blasted to a list. You clearly know nothing about my stack.\n- Asking for 15 minutes in the first line, before giving me one reason to care, is an instant no.\n- Your site leads with what you do, not what I get \u2014 in five seconds I can\u2019t tell if this is built for a 30-person or 3,000-person team.\n- No specific insight about MY problem. Why you, why now, why me?',
-    FINAL: 'Subject: the data your forecast runs on\n\nHi [Name] \u2014 most RevOps leaders I talk to don\u2019t distrust their forecast, they distrust the data underneath it.\n\nI wrote a plug-and-play Data Quality playbook: a contact database that corrects itself, with the prompts and steps. A few growth-stage teams now run it weekly. No pitch \u2014 it\u2019s free and it works on its own.\n\nIf it\u2019s useful, the rest of what I do is just more of that.\n\n[link]\n\nWorth a look?',
-    raw: ''
-  };
+  var SAMPLE_TWIN='PRIORITIES\n- A forecast the CRO actually trusts, built on data that is not a mess.\n- Consolidating an overlapping tool stack they get blamed for the cost of.\n- Making reps faster without adding headcount.\n\nPAINS\n- CRM data nobody believes, so every number gets re-litigated.\n- Being asked for attribution they cannot defend.\n- Manual ops work that does not scale.\n\nOBJECTIONS\n- "Another vendor." No time to evaluate one more tool.\n- Burned before by tools that promised automation and added work.\n- Allergic to AI hype with no substance.\n\nVOICE\n- Pragmatic, dry, says "show me." Respects specifics and numbers.\n- Deletes "transform", "synergy", "cutting-edge", "10x" on sight.\n\nREPLY TRIGGERS\n- A specific, true insight about their stack or problem.\n- Proof over pitch; a peer who solved the same thing.\n- Brevity, and no calendar link in the first touch.';
+  var SAMPLE_DRAFT='Subject: Transform your RevOps with AI\n\nHi there, hope this finds you well! CascadeGTM helps revenue teams transform their go-to-market with cutting-edge AI. We would love to show you how we can 10x your pipeline. Do you have 15 minutes this week for a quick call?';
+  var SAMPLE_ROUND1={ approved:false,
+    verdict:'This reads like a template blasted to a list, and it asks for my time before giving me a single reason to care.',
+    roast:'- "Transform with cutting-edge AI" is the exact hype I delete on sight. It says nothing.\n- "Hope this finds you well" plus "10x your pipeline" tells me you know nothing about my stack.\n- You ask for 15 minutes in the first line, before earning it.\n- No specific insight about my actual problem. Why you, why now, why me?',
+    improved:'Subject: the data your forecast runs on\n\nHi [Name] \u2014 most RevOps leaders I talk to trust their forecast only as much as they trust the data underneath it. I wrote a free Data Quality playbook, a contact database that corrects itself, that a few growth-stage teams now run weekly. No pitch and no call needed: [link]. If it is useful, the rest of what I do is just more of that. Worth a look?' };
+  var SAMPLE_APPROVE={ approved:true,
+    verdict:'Yes. It leads with my actual problem, proves value before asking for anything, and a free playbook is a low-risk reason to reply.', roast:'', improved:'' };
 })();
 </script>
 </body>
