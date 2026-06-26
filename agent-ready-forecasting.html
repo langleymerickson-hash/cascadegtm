@@ -226,25 +226,48 @@
   </div>
 </nav>
 <style>
+:root{
+  --ink:#ffffff;--ink-2:#f6f7f9;--card:#ffffff;--card-hi:#eef1f5;
+  --line:#e6e8ee;--line-hi:#d7dae2;--paper:#14181f;--fog:#4a4f5c;--fog-2:#7a8089;
+  --buy:#0e7c66;--buildon:#1e56d6;--build:#b45309;--brand:#be185d;
+}
 .fc{max-width:720px;margin:0 auto;padding:0 22px}
 .fc-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin:22px 0 10px}
 @media(max-width:760px){.fc-stats{grid-template-columns:repeat(2,1fr)}}
 .fc-stat{border:1px solid var(--line);border-radius:13px;background:var(--ink-2);padding:15px 14px}
 .fc-stat .n{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1;color:var(--buy)}
 .fc-stat .l{margin-top:8px;font-size:11.5px;color:var(--fog);line-height:1.42}
-.fc-cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 6px}
-@media(max-width:680px){.fc-cmp{grid-template-columns:1fr}}
-.fc-col{border:1px solid var(--line-hi);border-radius:15px;background:var(--ink-2);overflow:hidden}
-.fc-col .top{padding:18px 18px 16px;border-top:3px solid var(--buy)}
-.fc-col.clari .top{border-top-color:var(--buildon)}
-.fc-col .nm{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.01em}
-.fc-col .nm a{border-bottom:1px solid rgba(146,176,210,.32)}
-.fc-col .stage{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--buy);border-radius:999px;padding:4px 10px;font-weight:600}
-.fc-col.clari .stage{background:var(--buildon)}
-.fc-col .tag2{margin-top:11px;font-size:12.5px;color:var(--fog);line-height:1.5}
-.fc-attr{padding:11px 18px;border-top:1px solid var(--line)}
-.fc-attr .k{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--fog-2);margin-bottom:4px}
-.fc-attr .v{font-size:12.5px;color:var(--paper);line-height:1.5}
+/* comparison: aligned grid */
+.fc-cmpwrap{overflow-x:auto;margin:14px 0 6px;-webkit-overflow-scrolling:touch}
+.fc-cmp{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--card);min-width:600px}
+.fc-grid{display:grid;grid-template-columns:118px 1fr 1fr}
+.fc-hc{padding:16px 15px 15px;background:var(--ink-2);border-bottom:1px solid var(--line)}
+.fc-hc.lblcol{background:var(--card)}
+.fc-hc.fio{border-top:3px solid var(--buy);border-left:1px solid var(--line)}
+.fc-hc.clari{border-top:3px solid var(--buildon);border-left:1px solid var(--line)}
+.fc-hc .nm{font-family:var(--serif);font-size:19px;font-weight:600}
+.fc-hc .nm a{color:var(--paper);border-bottom:1px solid var(--line-hi)}
+.fc-hc .stage{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--buy);border-radius:999px;padding:3px 9px;font-weight:600}
+.fc-hc.clari .stage{background:var(--buildon)}
+.fc-hc .tag2{margin-top:9px;font-size:11.5px;color:var(--fog);line-height:1.45}
+.fc-rl{padding:13px 15px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--fog-2);border-top:1px solid var(--line);display:flex;align-items:center;background:var(--card)}
+.fc-rc{padding:13px 15px;font-size:12.5px;color:var(--paper);line-height:1.5;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.g2{display:flex;align-items:center;gap:7px;margin-top:10px;flex-wrap:wrap}
+.stars{position:relative;display:inline-block;font-size:13px;line-height:1;font-family:Arial,sans-serif}
+.stars::before{content:"★★★★★";color:var(--line-hi)}
+.stars i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#e8a317}
+.stars i::before{content:"★★★★★"}
+.g2 .r{font-size:11px;color:var(--fog);font-family:var(--mono)}
+.g2 a{font-size:10.5px;color:var(--buildon);font-family:var(--mono)}
+/* architecture diagram */
+.arch{display:flex;align-items:stretch;gap:0;margin:14px 0 6px;border:1px solid var(--line);border-radius:14px;background:var(--ink-2);padding:18px 16px;overflow-x:auto}
+.arch .node{flex:1;min-width:120px;border:1px solid var(--line-hi);border-radius:10px;background:var(--card);padding:13px 11px;text-align:center;display:flex;flex-direction:column;gap:3px;justify-content:center}
+.arch .node b{font-size:12.5px;color:var(--paper);font-weight:600}
+.arch .node span{font-size:10px;color:var(--fog);font-family:var(--mono);line-height:1.3}
+.arch .node.agent{border-color:var(--buy);background:rgba(14,124,102,.06)}
+.arch .arr{display:flex;align-items:center;justify-content:center;color:var(--fog-2);padding:0 8px;font-size:16px;flex:none}
+.archfeed{font-size:12px;color:var(--fog-2);text-align:center;margin:8px 0 6px;font-style:italic}
+/* checklist horizontal pillars */
 .fc-check{display:flex;flex-direction:column;gap:14px;margin:18px 0 6px}
 .fc-prow{border:1px solid var(--line);border-radius:15px;background:var(--ink-2);padding:18px 22px 6px}
 .fc-prow .phead{margin-bottom:15px}
@@ -265,9 +288,9 @@
 
 <p>I spent last week talking with GTM leaders about two things that have a lot of overlap: agent readiness and revenue forecasting.</p>
 
-<p>For a lot of growth-stage companies this is the end of the first half and the close of Q2. CROs are looking at actuals against the annual plan. At the same time, almost every leader I spoke with is asking the same question about AI: is my organization actually ready to put an agent on a real business process?</p>
+<p>For most growth-stage companies this is the end of the H1 and the close of Q2. CROs are looking at actuals against the annual plan. At the same time, almost every leader I spoke with is asking the same question about AI: is my organization actually ready to put an agent on a real business process?</p>
 
-<p>Forecasting sits right at the intersection. It is one of the few moves where you can free up people for revenue-generating work and improve the accuracy of the number in a single step. So if you are going to pick one place to prove out agent readiness in H2, I would start here.</p>
+<p>Forecasting sits right at the intersection. In a single step you can free up people for revenue-generating work and improve a core competency. So if you are going to pick one place to prove out agent readiness in H2, I would start here.</p>
 
 <div class="callout">By one Gartner figure, only about 7 percent of companies forecast within 90 percent accuracy, and fewer than half of sales leaders say they have high confidence in their number. In 2025, 87 percent of enterprises missed their revenue target. The forecast is the most-watched number in the company and the one we trust the least.</div>
 
@@ -287,9 +310,7 @@
 
 <p>Two tools cover most of the market for growth-stage teams, and the right one depends almost entirely on your stage and your CRM.</p>
 
-<div class="fc"><div class="fc-cmp">
-<div class="fc-col"><div class="top"><div class="nm"><a href="https://forecastio.ai/" target="_blank" rel="noopener">Forecastio</a></div><span class="stage">Series A to C</span><div class="tag2">A dedicated AI forecasting layer built natively on HubSpot. Light, fast, and transparent.</div></div><div class="fc-attr"><div class="k">Best for</div><div class="v">HubSpot teams, roughly 5 to 50 reps, Series A to C.</div></div><div class="fc-attr"><div class="k">CRM</div><div class="v">HubSpot-native, deep two-way sync.</div></div><div class="fc-attr"><div class="k">Pricing</div><div class="v">Published and flat-rate. Starts around $199 to $250 a month; roughly $11k a year for a 10-person team.</div></div><div class="fc-attr"><div class="k">Setup</div><div class="v">Self-serve, live in days. No enterprise contract.</div></div><div class="fc-attr"><div class="k">Accuracy</div><div class="v">Up to 95% claimed; customers report 85 to 93%.</div></div><div class="fc-attr"><div class="k">AI &amp; agents</div><div class="v">Multiple ML methods, accuracy tracking, scenario modeling, plus new Deal Review, Forecast Accuracy and Forecast Review agents.</div></div><div class="fc-attr"><div class="k">Documented ROI</div><div class="v">Lighter and transparent: about a 30% accuracy improvement and 3-plus hours a week back per manager.</div></div><div class="fc-attr"><div class="k">Full cycle</div><div class="v">Forecasts across teams, pipelines, reps and deal types, including renewals and expansion.</div></div></div><div class="fc-col clari"><div class="top"><div class="nm"><a href="https://www.clari.com/" target="_blank" rel="noopener">Clari</a></div><span class="stage">Series B and up</span><div class="tag2">An enterprise revenue orchestration platform: forecasting, pipeline inspection and a unified revenue data model.</div></div><div class="fc-attr"><div class="k">Best for</div><div class="v">50-plus reps, Series B and up, board-level forecast scrutiny.</div></div><div class="fc-attr"><div class="k">CRM</div><div class="v">Salesforce-centric via API. Not CRM-native.</div></div><div class="fc-attr"><div class="k">Pricing</div><div class="v">Quote-based, no public rates. Core runs about $100 to $125 per user a month; full stack can pass $200 to $400. Plan for $80k or more a year.</div></div><div class="fc-attr"><div class="k">Setup</div><div class="v">8 to 16 weeks with dedicated RevOps and services fees.</div></div><div class="fc-attr"><div class="k">Accuracy</div><div class="v">96 to 98% in vendor and customer figures; users cite a 20 to 30% improvement.</div></div><div class="fc-attr"><div class="k">AI &amp; agents</div><div class="v">Predictive models over a unified revenue data model, Copilot conversation intelligence, and an MCP server for agentic workflows.</div></div><div class="fc-attr"><div class="k">Documented ROI</div><div class="v">Forrester study: 398% three-year ROI, payback under six months, 50% of forecast admin time saved, $14M in misallocated spend prevented at one customer.</div></div><div class="fc-attr"><div class="k">Full cycle</div><div class="v">Net new plus renewals and expansion, with renewal-rate and win-rate lift in its case studies.</div></div></div>
-</div></div>
+<div class="fc"><div class="fc-cmpwrap"><div class="fc-cmp"><div class="fc-grid"><div class="fc-hc lblcol"></div><div class="fc-hc fio"><div class="nm"><a href="https://forecastio.ai/" target="_blank" rel="noopener">Forecastio</a></div><div class="g2"><span class="stars"><i style="width:90%"></i></span><span class="r">4.5/5 (24)</span><a href="https://www.g2.com/products/forecastio/reviews" target="_blank" rel="noopener">G2 ↗</a></div><span class="stage">Series A to C</span><div class="tag2">A dedicated AI forecasting layer built natively on HubSpot. Light, fast, transparent.</div></div><div class="fc-hc clari"><div class="nm"><a href="https://www.clari.com/" target="_blank" rel="noopener">Clari</a></div><div class="g2"><span class="stars"><i style="width:92%"></i></span><span class="r">4.6/5 (5,500+)</span><a href="https://www.g2.com/products/clari/reviews" target="_blank" rel="noopener">G2 ↗</a></div><span class="stage">Series B and up</span><div class="tag2">An enterprise revenue orchestration platform: forecasting, pipeline and a unified data model.</div></div><div class="fc-rl">Best for</div><div class="fc-rc">HubSpot teams, roughly 5 to 50 reps, Series A to C.</div><div class="fc-rc">50-plus reps, Series B and up, board-level forecast scrutiny.</div><div class="fc-rl">CRM</div><div class="fc-rc">HubSpot-native, deep two-way sync.</div><div class="fc-rc">Salesforce-centric via API. Not CRM-native.</div><div class="fc-rl">Pricing</div><div class="fc-rc">Published and flat-rate. Roughly $199 to $369 a month to start; about $11k a year for a 10-person team.</div><div class="fc-rc">Quote-based, no public rates. Core runs about $100 to $125 per user a month; full stack can pass $400. Plan for $80k or more a year.</div><div class="fc-rl">Setup</div><div class="fc-rc">Self-serve, live in days. No enterprise contract.</div><div class="fc-rc">5 to 12 weeks with dedicated RevOps and services fees.</div><div class="fc-rl">Accuracy</div><div class="fc-rc">Up to 95% claimed; customers report 85 to 93%.</div><div class="fc-rc">96 to 98% in vendor and customer figures; users cite a 20 to 30% improvement.</div><div class="fc-rl">AI &amp; agents</div><div class="fc-rc">Multiple ML methods, accuracy tracking, scenario modeling, plus new Deal Review, Forecast Accuracy and Forecast Review agents.</div><div class="fc-rc">Predictive models over a unified revenue data model, Copilot conversation intelligence, and an MCP server for agentic workflows.</div><div class="fc-rl">Documented ROI</div><div class="fc-rc">Lighter and transparent: about a 30% accuracy improvement and 3-plus hours a week back per manager.</div><div class="fc-rc">Forrester study: 398% three-year ROI, payback under six months, 50% of forecast admin time saved.</div><div class="fc-rl">Full cycle</div><div class="fc-rc">Forecasts across teams, pipelines, reps and deal types, including renewals and expansion.</div><div class="fc-rc">Net new plus renewals and expansion, with renewal-rate and win-rate lift in its case studies.</div></div></div></div></div>
 
 <p>Forecastio if you are on HubSpot and want published pricing and a setup measured in days. Clari once you are at enterprise scale on Salesforce with the RevOps muscle to run it. Either way, the platform is the buy. The readiness underneath it is the work, and that part is the same no matter which tool you pick.</p>
 
@@ -297,7 +318,9 @@
 
 <h2>What agent-ready actually means for a forecast</h2>
 
-<p>An agent is only as good as what it can see. Point one at a messy pipeline and it will do what any model does without data: hallucinate, confidently, at machine speed. The MIT research making the rounds found that roughly 95 percent of generative AI deployments returned no measurable value, and the cause was almost always data and governance, not the model.</p>
+<p>An agent is only as good as what it can see. Point one at a messy pipeline and it will do what any model does without data: hallucinate, confidently, at machine speed.</p>
+
+<div class="callout">The MIT research making the rounds found that roughly 95 percent of generative AI deployments returned no measurable value, and the cause was almost always data and governance, not the model.</div>
 
 <p>So agent-ready forecasting is not a platform decision. It is three things in place before any platform earns your trust: data the agent can rely on, a process that reflects how deals actually move, and a human who still owns the commit. Get those right and the tool does the rest. Skip them and no vendor will save you.</p>
 
@@ -308,12 +331,14 @@
 <div class="fc"><div class="fc-check">
 <div class="fc-prow"><div class="phead"><div class="cl one">Pillar 1</div><h4>Data the agent can rely on</h4></div><ul class="check pitems"><li>Every open opportunity carries the fields a forecast needs: amount or ARR, forecast category (Pipeline, Upside, Commit), close date, stage, product, region, and industry or segment.</li><li>You have at least 12 months of closed-won and closed-lost history for the model to learn from.</li><li>One system of record. Prospecting, customer success, billing and finance all write back to the CRM.</li><li>A named owner for CRM data quality, the way you would assign a data owner to any domain an agent touches.</li><li>Renewals and expansion live in the same system as new business, so the forecast is genuinely full cycle.</li></ul></div>
 <div class="fc-prow"><div class="phead"><div class="cl two">Pillar 2</div><h4>A process the model can trust</h4></div><ul class="check pitems"><li>Opportunity stages map to real, observable steps in your sales process, each with exit criteria, not a feeling.</li><li>The levers that move a deal are documented: what takes a deal from Upside to Commit, and what a Commit actually means.</li><li>Forecast categories are defined once and used the same way by every rep and every manager.</li><li>You capture a Day 1 forecast and run a weekly pipeline review, because weekly beats occasional by a wide margin.</li><li>Your forecast definitions are locked: the period, the revenue basis, and the submission point.</li></ul></div>
-<div class="fc-prow"><div class="phead"><div class="cl three">Pillar 3</div><h4>Signals and trust</h4></div><ul class="check pitems"><li>Conversation intelligence is connected, so call recordings and emails feed the model, not just rep-entered fields.</li><li>Engagement signals are captured: stakeholder count, recency of the last meeting, and whether a mutual action plan exists.</li><li>Objective deal signals weight the rep's call rather than replace it. Rep optimism is the single biggest source of forecast error.</li><li>A human stays in the loop and the forecast is auditable. The agent proposes, the CRO commits, and you can see which signals drove a call.</li><li>You measure the forecast itself with MAPE or a weighted version, and set an accuracy target against your own baseline.</li></ul></div>
+<div class="fc-prow"><div class="phead"><div class="cl three">Pillar 3</div><h4>Signals and oversight</h4></div><ul class="check pitems"><li>Conversation intelligence is connected, so call recordings and emails feed the model, not just rep-entered fields.</li><li>Engagement signals are captured: stakeholder count, recency of the last meeting, and whether a mutual action plan exists.</li><li>Objective deal signals weight the rep's call rather than replace it. Rep optimism is the single biggest source of forecast error.</li><li>A human stays in the loop and the forecast is auditable. The agent proposes, the CRO commits, and you can see which signals drove a call.</li><li>You measure the forecast itself with MAPE or a weighted version, and set an accuracy target against your own baseline.</li></ul></div>
 </div></div>
 
 <h2>Where it sits in the rest of the stack</h2>
 
 <p>The forecasting agent reads from the same system of record the rest of your GTM stack writes to. Your prospecting and marketing motion create the contacts and deals, the CRM holds them, and activity plus pipeline feed one forecast. Clean that data pipeline for the forecast and you have cleaned it for everything downstream.</p>
+
+<div class="fc"><div class="arch"><div class="node"><b>Prospecting &amp; marketing</b><span>create contacts &amp; deals</span></div><div class="arr">&rarr;</div><div class="node"><b>CRM</b><span>system of record</span></div><div class="arr">&rarr;</div><div class="node agent"><b>Forecasting agent</b><span>reads the spine</span></div><div class="arr">&rarr;</div><div class="node"><b>The forecast</b><span>a number you can defend</span></div></div><div class="archfeed">Conversation intelligence, activity and pipeline signals feed the agent</div></div>
 
 <p>That is the through-line of agent readiness across the whole stack. The win comes from making the business legible enough for an agent to act on and governed enough for a person to trust. Cleaner data, sharper process, and clear ownership get you there. Forecasting is the highest-leverage place to prove it, because the payoff lands on the most scrutinized number you have. For the buy-versus-build calls underneath all of this, the <a href="buy-build-vibe-code.html">matrix</a> walks every category by stage, and for where forecasting fits the 2026 picture, the <a href="state-of-ai-in-gtm-2026.html">State of AI in GTM</a> has the full read.</p>
 
@@ -322,10 +347,10 @@
 <p>Closing the gap between your forecast and your actuals is the work in front of every revenue team this quarter. Here is how I would frame it for the people who have to prioritize it together.</p>
 
 <div class="stackgrid" style="grid-template-columns:repeat(2,1fr)">
-<div class="scard engine"><div class="srole">CRO &amp; Head of Sales</div><p>This is your H2 lever. You are behind plan and your team is burning selling hours on a number you do not fully trust. Run the readiness check, hand forecast building to an agent, and put those hours back into pipeline and deal execution. The forecast you can defend to the board comes from a process an agent can run every day, not from a scramble in the last week of the quarter.</p></div>
-<div class="scard acquire"><div class="srole">Head of GTM Ops &amp; Revenue Engineering</div><p>Readiness is your build. The agent is bought, but the data model, the stage exit criteria, the integrations and the human in the loop gate are yours to engineer. This is the highest leverage agentic project you can own in H2, and the spine you clean for the forecast makes every downstream system cleaner too.</p></div>
-<div class="scard store"><div class="srole">CFO</div><p>Budget for this as a buy, not a build. Forecasting is a platform line item, and the return is documented: Clari's Forrester study showed a 398 percent three-year ROI with payback under six months, largely from better capital allocation and admin time saved. An auditable, agent-supported forecast tightens the link between what sales commits and the cash you plan around, and you will want clean, governed revenue data before scale and SOX force the issue anyway.</p></div>
-<div class="scard model"><div class="srole">Founder &amp; CEO</div><p>The forecast is evidence of whether you control the business or keep getting surprised by it. Agent-ready forecasting improves accuracy and frees selling capacity in one move, which is the kind of two for one a growth stage company needs in a tighter market. Fund the platform, prioritize the readiness work, and make it an H2 priority.</p></div>
+<div class="scard engine"><div class="srole">CRO &amp; Head of Sales</div><p>This is one of your H2 levers. You are behind plan and your team is burning selling hours on a number you do not fully trust. Run the readiness check, hand forecast building to an agent, and put those hours back into pipeline and deal execution. The forecast you can defend to the board comes from a process an agent can run every day, not from a scramble in the last week of the quarter.</p></div>
+<div class="scard acquire"><div class="srole">Head of GTM Ops &amp; Revenue Engineering</div><p>Put agentic forecasting on your H2 plan. Readiness is your build: the agent is bought, but the data model, the stage exit criteria, the integrations and the human in the loop gate are yours to engineer. This is the highest leverage agentic project you can own this half, and the spine you clean for the forecast makes every downstream system cleaner too.</p></div>
+<div class="scard store"><div class="srole">CFO</div><p>Forecast accuracy is a capital story. Investors and acquirers price the business on a number they can trust, so accuracy directly affects your next raise and your readiness for an exit. Treat this as a buy, not a build: you do not have the data scale to build the engine and the vendors already do, so fund the platform and invest your team's time in readiness. The return is documented, with Clari's Forrester study showing a 398 percent three-year ROI and payback under six months, which makes it straightforward to justify.</p></div>
+<div class="scard model"><div class="srole">Founder &amp; CEO</div><p>The forecast is evidence of if your business is predictable or you keep getting surprised by it. Agent-ready forecasting improves accuracy and frees selling capacity in one move, which is the kind of two for one a growth stage company needs in a tighter market. Fund the platform, prioritize the readiness work, and make it an H2 priority.</p></div>
 </div>
 
 <div class="pbcta">
