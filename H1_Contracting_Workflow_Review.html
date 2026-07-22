@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contracting Workflow · GTM Review</title>
+<style>
+  :root{
+    --paper:#fff; --tint:#F6F6F7; --ink:#0B0B0C; --muted:#6E6E73; --rule:#E3E3E6;
+    --crit:#C81E4B; --critbg:#FDF2F5; --warn:#B26A00; --warnbg:#FFFBF3; --ok:#0F7B5F; --okbg:#F1F8F5;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:"Helvetica Neue",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px 100px}
+
+  .masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:34px 0 18px;border-bottom:2px solid var(--ink)}
+  .masthead img{width:186px;height:auto;display:block}
+  .mast-meta{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.06em}
+  .mast-meta strong{color:var(--ink);font-weight:600}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);display:flex;gap:2px;flex-wrap:wrap;padding:9px 0;margin-bottom:0}
+  nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 11px;border-radius:2px}
+  nav a:hover{background:var(--tint);color:var(--ink)}
+
+  .titleblock{padding:40px 0 26px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--crit);margin:0 0 16px}
+  h1{font-size:clamp(32px,5vw,52px);line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0 0 16px}
+  .standfirst{font-size:18.5px;line-height:1.5;color:var(--muted);max-width:66ch;margin:0}
+  .thesis{margin:26px 0 0;padding:22px 26px;border-left:3px solid var(--crit);background:var(--tint)}
+  .thesis p{margin:0;font-size:19px;line-height:1.4;font-weight:500}
+  .thesis em{font-style:normal;color:var(--crit)}
+
+  section{padding:50px 0 0;scroll-margin-top:56px}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin:0 0 10px}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--crit);letter-spacing:.1em;padding-top:6px;flex:none;font-weight:600}
+  section.green .sec-num{color:var(--ok)}
+  h2{font-size:clamp(23px,2.9vw,31px);line-height:1.15;letter-spacing:-.02em;font-weight:600;margin:0}
+  .lede{font-size:17px;color:var(--muted);max-width:70ch;margin:0 0 28px 44px}
+  @media(max-width:640px){.lede{margin-left:0}}
+  h3.sub{font-size:18px;font-weight:600;margin:34px 0 12px;letter-spacing:-.01em}
+  p.body{font-size:15.5px;line-height:1.65;margin:0 0 14px;max-width:80ch}
+  p.body b{font-weight:600}
+
+  /* stages */
+  .stages{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 10px}
+  @media(max-width:900px){.stages{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:560px){.stages{grid-template-columns:repeat(2,1fr)}}
+  .st{border:1px solid var(--rule);border-top:3px solid var(--rule);border-radius:2px;padding:11px 10px 13px;background:var(--paper)}
+  .st.cause{border-top-color:var(--crit);background:var(--critbg)}
+  .st.symp{border-top-color:var(--warn);background:var(--warnbg)}
+  .st.won{border-top-color:var(--ok);background:var(--okbg)}
+  .st .id{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);margin:0 0 5px;font-weight:600}
+  .st .nm{font-size:13px;font-weight:600;line-height:1.25;margin:0 0 5px}
+  .st .ds{font-size:11.5px;color:var(--muted);line-height:1.4;margin:0}
+  .st .tg{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:2px 5px;border-radius:2px;margin-top:8px;font-weight:600}
+  .st.cause .tg{background:var(--crit);color:#fff}
+  .st.symp .tg{background:var(--warn);color:#fff}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 30px}
+  .legend span{display:flex;align-items:center;gap:7px}
+  .sw{width:14px;height:3px;border-radius:2px;flex:none}
+  .sw.c{background:var(--crit)} .sw.s{background:var(--warn)}
+
+  /* two-up */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .two > div{background:var(--paper);padding:22px 24px 24px}
+  .two h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;margin:0 0 12px;color:var(--crit);font-weight:600}
+  .two p{font-size:14.5px;line-height:1.6;margin:0 0 11px}
+  .two p:last-child{margin-bottom:0}
+
+  /* PHS */
+  .phs{display:grid;gap:10px}
+  .phsbox{border:1px solid var(--rule);border-left:3px solid var(--ok);border-radius:2px;padding:18px 22px;background:var(--paper)}
+  .phsbox .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);font-weight:600;margin:0 0 8px}
+  .phsbox p{margin:0;font-size:15px;line-height:1.6}
+  .flag{font-family:var(--mono);font-size:10.5px;color:var(--warn);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 0}
+
+  /* numbered steps */
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:0;max-width:84ch}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px;border-left:1px solid var(--rule);margin-left:13px}
+  ol.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+  ol.steps li::before{content:counter(s);position:absolute;left:-13px;top:-2px;width:26px;height:26px;border-radius:50%;background:var(--paper);border:1px solid var(--ink);font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:600}
+  ol.steps strong{display:block;font-size:15.5px;margin:0 0 3px}
+  ol.steps span{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+  /* agent cards */
+  .agent{border:1px solid var(--rule);border-radius:2px;margin:0 0 12px;overflow:hidden;background:var(--paper)}
+  .agent-top{padding:16px 22px 14px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
+  .agent-top h3{font-size:18px;margin:0;font-weight:600;letter-spacing:-.01em}
+  .agent-top .stage{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ok);font-weight:600}
+  .agent-body{padding:18px 22px 20px}
+  .agent-body .row{margin:0 0 15px}
+  .agent-body .row:last-child{margin-bottom:0}
+  .agent-body .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;font-weight:600}
+  .agent-body p{margin:0 0 8px;font-size:14.5px;line-height:1.6}
+  .agent-body p:last-child{margin-bottom:0}
+  .agent-body ul{margin:0;padding-left:17px}
+  .agent-body li{font-size:14.5px;line-height:1.55;margin:0 0 6px}
+  .wrong{background:var(--critbg);border-top:1px solid var(--rule);padding:15px 22px 17px}
+  .wrong .lbl{color:var(--crit)}
+  .wrong li,.wrong p{font-size:14px;line-height:1.55}
+
+  /* buy build */
+  .bbu{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 8px}
+  @media(max-width:700px){.bbu{grid-template-columns:1fr}}
+  .bb{border:1px solid var(--rule);border-top:3px solid var(--ok);border-radius:2px;padding:16px 18px 18px;background:var(--paper)}
+  .bb .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);font-weight:600;margin:0 0 7px}
+  .bb p{margin:0;font-size:14px;line-height:1.55;color:var(--muted)}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  caption{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 0 10px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1.5px solid var(--ink)}
+  tbody tr:hover{background:var(--tint)}
+  .m{font-family:var(--mono);font-size:12px;white-space:nowrap;font-weight:600}
+
+  .callout{margin:26px 0 0;border-left:3px solid var(--warn);background:var(--warnbg);padding:19px 24px}
+  .callout h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 9px;color:var(--warn)}
+  .callout p{margin:0 0 9px;font-size:14.5px;line-height:1.6;max-width:82ch}
+  .callout p:last-child{margin-bottom:0}
+  .callout.g{border-left-color:var(--ok);background:var(--okbg)}
+  .callout.g h3{color:var(--ok)}
+
+  .pull{margin:36px 0 0;padding:28px 32px;border-left:3px solid var(--ok);background:var(--tint)}
+  .pull p{font-size:clamp(18px,2.3vw,23px);line-height:1.35;letter-spacing:-.015em;margin:0;font-weight:500}
+  .pull em{font-style:normal;color:var(--ok)}
+
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <img src="data:image/png;base64,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" alt="HackerOne">
+    <div class="mast-meta">GTM Workflow Review<br>Prepared by <strong>Langley Erickson</strong><br>For the H1 GTM Panel</div>
+  </header>
+
+  <nav>
+    <a href="#break">01 · Where it breaks</a>
+    <a href="#redesign">02 · Redesign</a>
+    <a href="#agents">03 · Agents</a>
+    <a href="#first">04 · Build first &amp; measure</a>
+  </nav>
+
+  <div class="titleblock">
+    <p class="eyebrow">Workflow · contracting a new client</p>
+    <h1>Contracting</h1>
+    <p class="standfirst">Deals stall in Contracting and Negotiation. That is where we see it. It is not where it starts.</p>
+    <div class="thesis">
+      <p>The break happens in S1 and S2. <em>You measure it in S3 and S4.</em></p>
+    </div>
+  </div>
+
+  <!-- 01 -->
+  <section id="break">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Where it breaks, and why</h2></div>
+    <p class="lede">A six-stage process. Velocity is measured in days a deal sits in a stage. Deals lose velocity or stall in S3 and S4 — but the cause is upstream.</p>
+
+    <div class="stages">
+      <div class="st"><p class="id">S0</p><p class="nm">Meeting scheduled</p><p class="ds">Qualified meeting booked.</p></div>
+      <div class="st cause"><p class="id">S1</p><p class="nm">Meeting held</p><p class="ds">Qualified meeting completed.</p><span class="tg">Cause</span></div>
+      <div class="st cause"><p class="id">S2</p><p class="nm">Proposal</p><p class="ds">Proposal sent to the client.</p><span class="tg">Cause</span></div>
+      <div class="st symp"><p class="id">S3</p><p class="nm">Contracting</p><p class="ds">Contract shared with the client.</p><span class="tg">Symptom</span></div>
+      <div class="st symp"><p class="id">S4</p><p class="nm">Negotiation</p><p class="ds">Redlines returned, negotiation active.</p><span class="tg">Symptom</span></div>
+      <div class="st won"><p class="id">S5</p><p class="nm">Closed won</p><p class="ds">Contract signed, deal won.</p></div>
+      <div class="st"><p class="id">S6</p><p class="nm">Closed lost</p><p class="ds">No agreement reached.</p></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw c"></i>Where the problem is created</span>
+      <span><i class="sw s"></i>Where the problem is visible</span>
+    </div>
+
+    <div class="two">
+      <div>
+        <h4>S1 · what happens in the meeting</h4>
+        <p>If the sales person is not equipped with a value based message that resonates, and a pitch deck that supports it, they need another way to keep the deal open.</p>
+        <p>So they signal flexibility. They hint at discounts, unique packaging, a new SKU, or other commercial levers — anything to close the gap that the missing value message left behind.</p>
+        <p><b>The commercial lever is always available. The value message has to be built.</b> When only one of the two is ready, reps use the one they have.</p>
+      </div>
+      <div>
+        <h4>S2 · what happens in the proposal</h4>
+        <p>After the call the rep follows up with a proposal — often an email or a landing page that recaps the call and the use case, and includes an initial quote: products, pricing, payment terms, upfront or setup fees.</p>
+        <p>If flexibility was teased in S1, it shows up here in writing.</p>
+        <p><b>That plants the seed that becomes the late funnel delay.</b> A non-standard term written into a proposal becomes a non-standard contract, which becomes legal drafting, redlines, and days in stage.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Why this is worth saying plainly</h3>
+      <p>Adding legal capacity in S4 treats the symptom. The deals arriving there are non-standard because of decisions made two stages earlier, when changing them was free. <b>Fix the input, not the queue.</b></p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="redesign" class="green">
+    <div class="sec-head"><span class="sec-num">02</span><h2>How I would redesign it</h2></div>
+    <p class="lede">Start by documenting the business problem and getting cross-functional sign-off on the problem, the hypothesis, and the solution. Not by building.</p>
+
+    <h3 class="sub">The problem statement, worked</h3>
+    <div class="phs">
+      <div class="phsbox">
+        <p class="k">Problem</p>
+        <p>New business deals are stalling in late stages. 75% of deals take 30–90 days to move between S3 and S4. Deals that stall win at half the rate of deals that clear S3 and S4 in 30 days or less. Non-standard pricing, packaging, and payment terms are common in the deals that stall.</p>
+      </div>
+      <div class="phsbox">
+        <p class="k">Hypothesis</p>
+        <p>If we equip sales people with value based messaging that resonates, give them agents that assist through S1–S3, and give legal and deal desk an agent in S4, we improve deal velocity and win rate so that fewer than 10% of deals stall in S3 and S4.</p>
+      </div>
+      <div class="phsbox">
+        <p class="k">Solution</p>
+        <p>Fix the foundation first — data and standard operating procedures. Then build five agents across the deal, in the order the problem is created. Then test, roll out with training, and measure against a control.</p>
+      </div>
+    </div>
+    <p class="flag">Numbers shown are the shape of the statement, not your data. The real ones come from your CRM in week one.</p>
+
+    <h3 class="sub">Prerequisites, before any build</h3>
+    <p class="body">These are not phase one. They are the condition for phase one.</p>
+    <ol class="steps">
+      <li><strong>Audit the data</strong><span>This workflow touches Salesforce Account, Opportunity, Opportunity Contact Role, Quote, Order, Contract, Pricing and Products — plus custom objects depending on the use case. A complete audit of those objects and the data quality in key fields comes first.</span></li>
+      <li><strong>Write the standard operating procedures</strong><span>Deal management, drafting a proposal, creating a contract, negotiating and executing it. The SOPs define what the agents enforce. Without them there is nothing to enforce.</span></li>
+      <li><strong>Model and approve the cost</strong><span>Agent and platform cost modelled for current team size and volume, with approval from the manager, CFO and controller before work begins.</span></li>
+    </ol>
+
+    <h3 class="sub">Then build, in this order</h3>
+    <ol class="steps">
+      <li><strong>Make sure the value message resonates</strong><span>Equip sales with messaging built and pressure-tested against the buyer persona. This is the root cause, so it is the first fix.</span></li>
+      <li><strong>Enforce the SOPs with controls in the conversation</strong><span>Keep early-stage commercial discussion to standard pricing, packaging and terms, and capture what was discussed into the CRM as it happens.</span></li>
+      <li><strong>Make the standard proposal the fastest path</strong><span>A proposal agent that makes quoting with standard terms the most efficient way to follow up after a meeting — with controls that ensure it is the only way.</span></li>
+      <li><strong>Build the contracting workflow</strong><span>Sales drafts a standard contract. Executives and legal handle the rare approved non-standard case. The SOP dictates the functionality.</span></li>
+      <li><strong>Give legal and deal desk a negotiation agent</strong><span>Respond to client redlines quickly and in the interest of the business, using approved language.</span></li>
+    </ol>
+
+    <h3 class="sub">Testing and rollout</h3>
+    <p class="body">Test all agents across all use cases. Roll out to individual users with training and live assistance. <b>Preferred: hold a control group without agent access</b> so effectiveness can be measured against a real baseline. Some businesses have no appetite for that design and prefer a full rollout measured against prior periods — that is the backup plan, and it is weaker evidence.</p>
+
+    <h3 class="sub">After rollout, four things stay funded</h3>
+    <table>
+      <tbody>
+        <tr><td class="m">01</td><td><b>Continual data audits.</b> Other initiatives and unexpected changes break the data these workflows depend on.</td></tr>
+        <tr><td class="m">02</td><td><b>Measurement.</b> Days in S3 and S4, percentage of deals over 30 days in those stages, and win rate by time in stage.</td></tr>
+        <tr><td class="m">03</td><td><b>A user feedback loop</b> that drives improvements to the agents.</td></tr>
+        <tr><td class="m">04</td><td><b>Maintenance time</b> so the workflow stays reliable and evolves with the business.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 03 -->
+  <section id="agents" class="green">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The agents, and where they can go wrong</h2></div>
+    <p class="lede">Five agents plus data validation. For each one: what it is for, how it works, and what fails.</p>
+
+    <h3 class="sub">How I decide what to build</h3>
+    <div class="bbu">
+      <div class="bb"><p class="k">Buy</p><p>Systems of record — CRM, CPQ, ERP, e-signature, billing platforms.</p></div>
+      <div class="bb"><p class="k">Build</p><p>The workflows that connect them.</p></div>
+      <div class="bb"><p class="k">Use AI</p><p>To orchestrate people, systems and decisions — not to replace deterministic business logic.</p></div>
+    </div>
+
+    <!-- buyer twin -->
+    <div class="agent">
+      <div class="agent-top"><h3>Buyer Twin Agent</h3><span class="stage">Upstream · messaging</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>Draft value based messaging that resonates with the prospect.</p></div>
+        <div class="row"><p class="lbl">How it works</p><p>The user collaborates with an AI twin of their core buyer persona, built from call recording data for that persona plus research. The user submits draft messaging. The twin gives direct feedback. The user revises. The loop continues until the twin approves the message. Product marketing, marketing and sales use it to develop top-of-funnel messaging and sales collateral for each persona.</p></div>
+      </div>
+      <div class="wrong">
+        <p class="lbl">What can go wrong</p>
+        <ul>
+          <li>Messaging built for one level of buyer does not always resonate at another. A C-suite buyer and a manager think about the problem space and the jobs to be done differently.</li>
+          <li>Training on limited call data from one persona, or on calls from deals that did not close, produces messaging that will not convert.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- conv intel -->
+    <div class="agent">
+      <div class="agent-top"><h3>Conversational Intelligence Agent</h3><span class="stage">S1 · in the meeting</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>Give the sales person live assistance on calls — surface value based messaging at key moments, keep commercial discussion to standard structures, and sync what was said back to the CRM.</p></div>
+        <div class="row"><p class="lbl">Buy and build on top</p><p>AI powered conversational intelligence tools such as Gong and Clari are commodities. Do not build them. Build the workflows and automation on top of them.</p></div>
+        <div class="row"><p class="lbl">How it works</p>
+          <ul>
+            <li>Listens for commercial details — pricing, packaging, payment terms, discounts — and for the value based messaging.</li>
+            <li>Syncs that to fields on the Salesforce Opportunity, so leadership and operations can audit what value message was used and which commercials were discussed.</li>
+            <li>Posts the recording and the commercials discussed to a Slack channel immediately after the call, so the team can confirm in real time that we are using the right message and discussing standard deal structures.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrong">
+        <p class="lbl">What can go wrong</p>
+        <p>It can occasionally mishear something on the call — the number of seats, or the price per seat. The sales person reviews and edits the data before it is written to Salesforce.</p>
+      </div>
+    </div>
+
+    <!-- proposal -->
+    <div class="agent">
+      <div class="agent-top"><h3>Proposal Agent</h3><span class="stage">S2 · proposal</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>Make follow-up after the first meeting seamless and efficient, using the value based message and the standard terms actually discussed on the call.</p></div>
+        <div class="row"><p class="lbl">Inputs</p><p>Call recording data from the conversational intelligence agent, updated Salesforce Opportunity and Quote data from the completed call, and a detailed standard operating procedure on quoting.</p></div>
+        <div class="row"><p class="lbl">How it works</p>
+          <ul>
+            <li>Appears as a landing page. The rep selects the deal, the company, the prospect, and the products, pricing and terms discussed on the call.</li>
+            <li>Generates a unique landing page and a follow-up email to send to the prospect.</li>
+            <li>The sent email syncs back to Salesforce, and automation pulls the proposal into the Slack channel for that deal so the team has visibility.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrong">
+        <p class="lbl">What can go wrong</p>
+        <p>Incomplete or inaccurate Salesforce data — account name, opportunity ARR, contact role title — produces inaccurate output. <b>The foundation of this workflow is accurate data across every object it touches.</b></p>
+      </div>
+    </div>
+
+    <!-- contracting -->
+    <div class="agent">
+      <div class="agent-top"><h3>Contracting Workflow</h3><span class="stage">S3 · contracting</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>Let the sales team draft a standard contract, and let sales and sales leadership work together inside the SOP to produce a pre-approved contract that can go to the counterparty. In the rare case where executive management or legal has approved a non-standard format, that party uses the workflow to update the contract.</p></div>
+        <div class="row"><p class="lbl">Inputs</p><p>A text template of the standard contract, and a robust SOP for contracting that includes approval workflows for packaging, pricing, payment terms and opt-out language. Plus accurate Salesforce data: Account, Opportunity, Opportunity Product, Quote Line Item, and custom objects as needed.</p></div>
+      </div>
+      <div class="wrong">
+        <p class="lbl">What can go wrong</p>
+        <ul>
+          <li>Same dependency as the proposal agent — incomplete or inaccurate Salesforce data produces inaccurate contracts.</li>
+          <li>If the client requires the contract to be on their own paper, this workflow cannot support that as designed. It could be added in a later phase, but today it runs outside the core workflow.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- negotiation -->
+    <div class="agent">
+      <div class="agent-top"><h3>Negotiation Agent</h3><span class="stage">S4 · negotiation</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>Assist internal legal and deal desk as they work through client redlines and draft updates to clauses and language.</p></div>
+        <div class="row"><p class="lbl">Inputs</p><p>A robust SOP for negotiating a contract — which sections are editable without escalation to the executive team, examples of common edits, and frequently asked questions. Plus a dataset of approved contracts, with that language fed into the LLM powered tool.</p></div>
+        <div class="row"><p class="lbl">How it works</p><p>Appears as a landing page. The user pastes the contract language in question into one field and the context for the update into another. The agent returns approved language drawn from the dataset of approved contracts.</p></div>
+      </div>
+      <div class="wrong">
+        <p class="lbl">What can go wrong</p>
+        <p>Language returned by this agent is a suggestion from an LLM, not the judgement of an experienced general counsel. Treat it as directionally correct and <b>always verify it with a human</b> who applies critical thinking and their own knowledge to decide whether the language serves the business and creates a mutually beneficial term.</p>
+      </div>
+    </div>
+
+    <!-- data validation -->
+    <div class="agent">
+      <div class="agent-top"><h3>Data Validation Automation</h3><span class="stage">Foundation · all stages</span></div>
+      <div class="agent-body">
+        <div class="row"><p class="lbl">Purpose</p><p>The data driving these workflows — across Opportunity, Opportunity Contact Role, Quote, Order, Contract, Pricing, Products and custom objects — must be subject to review.</p></div>
+        <div class="row"><p class="lbl">How it works</p>
+          <ul>
+            <li>Automation flags deals in S2, S3 and S4 that are missing the data needed to power the agent workflows.</li>
+            <li>An LLM powered validation workflow checks that the data is both available and accurate.</li>
+            <li>It produces a list of records needing review with suggested edits, which the user executes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Cost modelling, before anything is built</h3>
+    <p class="body">Before developing any agentic solution or buying any platform, model the cost and get approval from the manager, CFO and controller for current and future use.</p>
+    <p class="body"><b>Agent cost</b> is driven by token usage and price per token — tokens per run, runs per day, runs per person, number of people using the tool. Caching a share of the input reduces cost, and model choice is another lever. <b>Platform cost</b> is more straightforward. This recommendation uses tooling you already own — Gong, Salesforce, Slack — and the model includes those plus any updates they need.</p>
+
+    <div class="callout">
+      <h3>What stays human</h3>
+      <p>Final contract language is decided by counsel, always. The rep reviews and edits what the conversational intelligence agent writes to Salesforce before it is committed. Non-standard contracts are approved by executives and legal, not by an agent. <b>AI orchestrates people, systems and decisions. It does not replace deterministic business logic.</b></p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="first" class="green">
+    <div class="sec-head"><span class="sec-num">04</span><h2>What I would build first, and how I would measure it</h2></div>
+    <p class="lede">Build in the order the problem is created, not the order it becomes visible.</p>
+
+    <h3 class="sub">First</h3>
+    <p class="body"><b>The data audit and the SOPs.</b> Every agent in this design fails the same way — bad data in, wrong document out. Nothing else is worth starting until the objects are audited and the procedures are written, because the SOPs are what the agents enforce.</p>
+    <p class="body"><b>Then the value message and the S1 controls</b>, because that is where the problem is created. Fixing S4 first would make us faster at processing non-standard contracts we should not have generated.</p>
+
+    <h3 class="sub">How I would measure it</h3>
+    <table>
+      <caption>Success metrics</caption>
+      <thead><tr><th style="width:34%">Metric</th><th>What it tells us</th></tr></thead>
+      <tbody>
+        <tr><td><b>Days deals spend in S3 and S4</b></td><td>The headline velocity measure, and the one the problem statement is written against.</td></tr>
+        <tr><td><b>Percentage of deals over 30 days in S3 and S4</b></td><td>The stall rate. Target is under 10%, from a starting point of 75%.</td></tr>
+        <tr><td><b>Win rate by time spent in S3 and S4</b></td><td>Connects velocity to revenue. Stalled deals currently win at half the rate.</td></tr>
+        <tr><td><b>Agent adoption per user</b></td><td>If reps are not using it, nothing above will move. Adoption is the leading indicator.</td></tr>
+        <tr><td><b>Data health on workflow-critical fields</b></td><td>The dependency everything else rests on. Watched continuously, not once.</td></tr>
+      </tbody>
+    </table>
+    <p class="body" style="margin-top:16px">All of this lives in one dashboard that monitors agent usage and encourages adoption, gives visibility into the data driving the workflow, and reports the success metrics.</p>
+
+    <div class="callout g">
+      <h3>Where this comes from</h3>
+      <p>The agents and workflows in this design are ones I have built recently — with clients at CascadeGTM and at Incredible Health. The failure modes listed under each agent are not hypothetical. They are what I have watched go wrong and had to fix.</p>
+    </div>
+
+    <div class="pull">
+      <p>Get the data and the procedures right, fix the message before the paper, and <em>the late-stage queue stops forming.</em></p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Contracting workflow review · Langley Erickson</span>
+    <span>Prepared for HackerOne</span>
+  </footer>
+
+</div>
+</body>
+</html>
